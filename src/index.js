@@ -6,7 +6,7 @@ import HeadImage from'./icons/linuxHead.png'
 import HomeIcon from './icons/HomeButtons.svg'
 import allTasksicon from './icons/allTasks.svg'
 import dateIcon from './icons/arrangeDates.svg'
-import createProjectsicon from './icons/createProjects.svg'
+import createProjectsicon from './icons/createProject.svg'
 import projectsIcon from './icons/Projects.svg'
 
 function domElementMaker(type,name,parentBox,Words=""){
@@ -64,7 +64,7 @@ let ProjectTexts=domElementMaker('p',"hometext",ProjectsButton,"Projects");
 
 let createprojectsButton=domElementMaker('button',"createprojects",section);
 let createProjectsIcon=domImageLoad(createProjectsicon,createprojectsButton,"createprojectsicon")
-let createProject=domElementMaker('p',"projectTect",createprojects,"Create Projects");
+let createProject=domElementMaker('p',"projectText",createprojects,"Create Projects");
 createprojectsButton.title="Create Project"
 
 

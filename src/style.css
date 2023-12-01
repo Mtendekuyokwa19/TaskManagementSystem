@@ -1,8 +1,13 @@
+  @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
+
+
 *{
 
     padding: 0px;
     margin: 0px;
     box-sizing: 0px;
+    font-family: 'Quicksand', sans-serif;
+    letter-spacing: 0.8px;
 
 
 }
@@ -37,10 +42,10 @@ display: flex;
 
 align-items: center;
 
-background-color: #2D2F39;
+background-color: #333333;
 
 padding: 22px;
-border-radius: 0px 0px 12px 12px;
+border-radius: 0px 0px 20px 20px;
 
 
 
@@ -71,11 +76,11 @@ font-size: 18px;
 
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
 }
 #sidebox button{
 
-    background-color:transparent ;
+    background:transparent ;
     color: #9d9fa5;
     border: none;
     width: 150px;
@@ -90,3 +95,14 @@ font-size: 18px;
     font-weight: bold;
 }
 
+#sidebox button:last-child{
+
+background-color:#333333;
+border-radius: 12px;
+height: 50px;
+color:white;
+width: 200px;
+
+margin-left: 30px;
+
+}
