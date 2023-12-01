@@ -4,8 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   entry: {
     index: './src/index.js',
-    add: './src/add.js',
-    check:'./src/check.js'
+    add: './src/add/add.js',
+    check:'./src/check/check.js'
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -19,5 +19,20 @@ module.exports = {
     clean:true
   },
 
-  devtool:'inline-source-map'
+  devtool:'inline-source-map',
+
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+      },
+    ],
+  },
+ 
+ 
 };

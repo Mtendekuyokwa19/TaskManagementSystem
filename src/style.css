@@ -1,0 +1,92 @@
+*{
+
+    padding: 0px;
+    margin: 0px;
+    box-sizing: 0px;
+
+
+}
+body{
+background-color: #1c1c1c;
+
+display: grid;
+grid-template-columns: 250px repeat(4,1fr);
+grid-template-rows:repeat(4,1fr) ;
+height: 100vh;
+color: white;
+
+
+}
+
+#sidebox{
+
+  
+    grid-area:1/1/-1/1;
+    background-color: #161a23;
+  
+ 
+
+
+
+}
+
+#appTitleHolder{
+
+
+display: flex;
+
+align-items: center;
+
+background-color: #2D2F39;
+
+padding: 22px;
+border-radius: 0px 0px 12px 12px;
+
+
+
+}
+#appTitle{
+
+font-size: 18px;
+
+}
+#appLogo{
+  
+    background: url(./icons/linuxHead.png);
+    width: 60px;
+    height: 60px;
+}
+
+#sectionTitle{
+
+    font-size: 12px;
+    margin:  12px 0px 0px 39px;
+    
+
+
+}
+#section{
+
+    color: #484b52;
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+#sidebox button{
+
+    background-color:transparent ;
+    color: #9d9fa5;
+    border: none;
+    width: 150px;
+    display: flex;
+    height: 40px;
+    padding: 12px;
+    gap: 14px;
+    font-size: 15.5px;
+    padding-left: 26px;
+    text-align: right;
+    align-items: center;
+    font-weight: bold;
+}
+
