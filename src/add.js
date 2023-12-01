@@ -78,7 +78,7 @@ addToAllProjects(Dance);
 let walk=new createTask("walk","very");
 addingTask("Dance",walk);
 
-console.log(allProjects);
+
 
 
 
