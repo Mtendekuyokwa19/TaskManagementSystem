@@ -4,7 +4,7 @@ import './style.css'
 
 import HeadImage from'./icons/linuxHead.png'
 import HomeIcon from './icons/HomeButtons.svg'
-import allTasksicon from './icons/allTasks.svg'
+import allTasksicon from './icons/Tasks.svg'
 import dateIcon from './icons/arrangeDates.svg'
 import createProjectsicon from './icons/createProject.svg'
 import projectsIcon from './icons/Projects.svg'
