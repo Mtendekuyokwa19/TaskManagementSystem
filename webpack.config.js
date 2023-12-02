@@ -7,8 +7,8 @@ module.exports = {
       import: './src/index.js',
       dependOn: 'shared',
     },
-    another: {
-      import: './src/creatingJselement.js',
+    add: {
+      import: './src/add.js',
       dependOn: 'shared',
     },
     shared: 'date-fns',

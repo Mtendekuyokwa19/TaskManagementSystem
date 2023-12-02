@@ -86,7 +86,7 @@ createprojectsButton.title="Create Project"
 
 
 
-return {siderbox,createprojectsButton};
+return {createprojectsButton,siderbox};
 
 })();
 
@@ -96,7 +96,7 @@ export let topBar=(()=>{
 
   let topBox=domElementMaker('div','topBox',document.body);
  
-  let topText=domElementMaker('p','topText',topBox,`It's ${format(new Date(), 'EEEE')}`)
+  let topText=domElementMaker('p','topText',topBox,`It's a ${format(new Date(), 'EEEE')}`)
   let topBoximage=domImageLoad(topBoxImage,topBox,'topBoximagegirl');
   let musicpic=domImageLoad(musicimage,topBox,"musicboy")
   let boywithpapers=domImageLoad(boypapers,topBox,"boyWithpapers");
@@ -121,7 +121,70 @@ return {addTask}
 
 
 
+let inputBoxcreateProjects=(()=>{
+  let dialogBox=domElementMaker('dialog',"dialogCreateProject",sidebar.siderbox);
+  let messageBoxdiv=domElementMaker('form',"messageBoxdiv",dialogBox)
+  let projectNameinput=domElementMaker('input',"projectNameinput",messageBoxdiv)
+  projectNameinput.placeholder="Go to the Moon";
+
+  let buttonsdiv=domElementMaker('div',"buttondiv",messageBoxdiv)
+
+  let cancelButton=domElementMaker('button',"cancelButton",buttonsdiv,"Cancel")
+  let doneButton=domElementMaker('button',"doneButton",buttonsdiv,"Create")
+
+  
+return {dialogBox,cancelButton,doneButton}
+})()
+function disablebutton(button){
+  button.disabled=true;
+  
+  
+  }
+
+  function createFormforprojects(button){
+
+    inputBoxcreateProjects();
+    disablebutton(button)
 
 
 
+  }
+
+sidebar.createprojectsButton.addEventListener('click',function(e){ 
+  inputBoxcreateProjects.dialogBox.show();
+});
+
+function clearAllElements(selector){
+
+let holderContainer=document.querySelector(`${selector}>*`);
+holderContainer.forEach(element => {
+  element.remove();
+});
+
+
+
+}
+
+
+function addProject(){
+
+  let input=document.querySelector('#projectNameinput').value;
+
+  if (input==="") {
+    
+    
+    inputBoxcreateProjects.doneButton.preventDefault();
+
+    return
+  }
+
+
+}
+
+
+inputBoxcreateProjects.doneButton.addEventListener('click',function (e) {
+  
+  addProject();
+ 
+});
 

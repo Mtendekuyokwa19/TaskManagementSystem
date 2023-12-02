@@ -89,7 +89,7 @@ font-weight: bold;
     gap: 8px;
 
 }
-#sidebox button{
+#section>button{
 
     background:transparent ;
     color: #9d9fa5;
@@ -106,7 +106,7 @@ font-weight: bold;
     font-weight: bold;
 }
 
-#sidebox button:last-child{
+#section>button:last-child{
 
 background-color:#333333;
 border-radius: 12px;
@@ -117,7 +117,7 @@ width: 200px;
 margin-left: 30px;
 
 }
-#sidebox button:hover{
+#section>button:hover{
 
     background-color: #2D2F39;
     width: 250px;
@@ -125,7 +125,7 @@ margin-left: 30px;
 
 }    
 
-#sidebox button:last-child:hover{
+#section>button:last-child:hover{
 
     background-color:#3754DB;
     color: white;
@@ -193,6 +193,54 @@ border-radius: 100%;
 
 #addTask:hover{
     background-color: #ff5678;
+
+
+}
+#dialogCreateProject{
+
+    border: none;
+    background-color: #9d9fa5;
+    border-radius: 10px;
+ 
+padding: 20px;
+margin-top: 12px;
+
+}
+#messageBoxdiv{
+
+    display: flex;
+
+    flex-direction: column;
+    padding: 15px;
+    gap:6px;
+
+}
+
+#messageBoxdiv button{
+
+    width: 78px;
+    height: 26px;
+    background-color: #3754DB;
+    
+
+}
+
+#messageBoxdiv input{
+
+    padding: 4px 12px;
+    border-radius:4px ;
+    border: none;
+    outline: none;
+
+}
+#messageBoxdiv input:active{
+    border: none;
+    outline: none;
+}
+#messageBoxdiv div{
+
+    display: flex;
+    gap:8px;
 
 
 }
