@@ -3,9 +3,18 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
-    index: './src/index.js',
-    add: './src/add/add.js',
-    check:'./src/check/check.js'
+    index: {
+      import: './src/index.js',
+      dependOn: 'shared',
+    },
+    another: {
+      import: './src/creatingJselement.js',
+      dependOn: 'shared',
+    },
+    shared: 'date-fns',
+   },
+   optimization: {
+    runtimeChunk: 'single',
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -33,6 +42,7 @@ module.exports = {
       },
     ],
   },
+
  
  
 };

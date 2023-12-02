@@ -1,4 +1,5 @@
-  @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
+
+  @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Quicksand:wght@500&display=swap');
 
 
 *{
@@ -48,8 +49,10 @@ align-items: center;
 
 background-color: #333333;
 
+
 padding: 22px;
-border-radius: 0px 0px 20px 20px;
+height: 106px;
+
 
 
 
@@ -57,6 +60,7 @@ border-radius: 0px 0px 20px 20px;
 #appTitle{
 
 font-size: 18px;
+font-weight: bold;
 
 }
 #appLogo{
@@ -70,6 +74,7 @@ font-size: 18px;
 
     font-size: 12px;
     margin:  12px 0px 0px 39px;
+   
     
 
 
@@ -110,5 +115,84 @@ color:white;
 width: 200px;
 
 margin-left: 30px;
+
+}
+#sidebox button:hover{
+
+    background-color: #2D2F39;
+    width: 250px;
+
+
+}    
+
+#sidebox button:last-child:hover{
+
+    background-color:#3754DB;
+    color: white;
+    border-radius: 0px;
+    width: 200px;
+    }
+#topBoximagegirl,#musicboy,#boyWithpapers{
+
+
+height: 150px;
+
+
+
+
+
+}
+#topBoximagegirl{
+
+    margin-left:12px ;
+}
+
+
+#topBox{
+
+grid-column-start: 2;
+grid-column-end: 6;
+background-color: #3754DB;
+display: flex;
+gap:10px;
+
+
+
+
+}
+#topText{
+    font-family: 'Indie Flower', cursive;
+align-self: center;
+font-size: 50px;
+font-weight: bold;
+margin: 12px;
+}
+#addTask{
+
+width: 70px;
+height: 70px;
+position: relative;
+top:270px;
+left:950px;
+background-color: #3754DB;
+
+border: none;
+border-radius: 100%;
+
+
+}
+
+#addtaskicon{
+
+    fill:white;
+   
+
+
+
+}
+
+#addTask:hover{
+    background-color: #ff5678;
+
 
 }
