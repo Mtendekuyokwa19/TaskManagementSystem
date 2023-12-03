@@ -201,9 +201,9 @@ border-radius: 100%;
     border: none;
     background-color: #9d9fa5;
     border-radius: 10px;
- 
+    width: 207px;
 padding: 20px;
-margin-top: 12px;
+margin-top: 427px;
 
 }
 #messageBoxdiv{
@@ -213,7 +213,8 @@ margin-top: 12px;
     flex-direction: column;
     padding: 15px;
     gap:6px;
-
+    opacity: 1;
+   
 }
 
 #messageBoxdiv button{
@@ -244,3 +245,46 @@ margin-top: 12px;
 
 
 }
+
+
+  
+textarea {
+    resize: none;
+  }
+ #dialogTask{
+
+    position: relative;
+    top:27%;
+    left:40%;
+    border: none;
+    outline:none;
+    width: 291px;
+    height: 329px;
+    padding: 13px;
+   border-radius: 12px;
+
+ }
+ #dialogTask input{
+
+    background-color: #9d9fa5;
+ } 
+
+  dialog::backdrop {
+    backdrop-filter: blur(5px);
+  }
+  #buttonHolder{
+
+display: flex;
+gap: 8px;
+justify-content: end;
+height: 30px;
+padding: 0px 10px;
+  }
+
+  #buttonHolder button{
+
+    width: 130px;
+   
+
+
+  }

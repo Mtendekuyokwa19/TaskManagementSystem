@@ -16,11 +16,12 @@ import {format} from 'date-fns';
 
 
 
-export function domElementMaker(type,name,parentBox,Words=""){
+export function domElementMaker(type,name,parentBox,Words="",placeholderWords=""){
 
 let newElement=document.createElement(type);
 newElement.id=name;
 newElement.textContent=Words
+newElement.placeholder=placeholderWords;
 parentBox.appendChild(newElement);
 
 return newElement;
@@ -96,7 +97,7 @@ export let topBar=(()=>{
 
   let topBox=domElementMaker('div','topBox',document.body);
  
-  let topText=domElementMaker('p','topText',topBox,`It's a ${format(new Date(), 'EEEE')}`)
+  let topText=domElementMaker('p','topText',topBox,`Enjoy your ${format(new Date(), 'EEEE')}`)
   let topBoximage=domImageLoad(topBoxImage,topBox,'topBoximagegirl');
   let musicpic=domImageLoad(musicimage,topBox,"musicboy")
   let boywithpapers=domImageLoad(boypapers,topBox,"boyWithpapers");
@@ -151,7 +152,7 @@ function disablebutton(button){
   }
 
 sidebar.createprojectsButton.addEventListener('click',function(e){ 
-  inputBoxcreateProjects.dialogBox.show();
+  inputBoxcreateProjects.dialogBox.showModal();
 });
 
 function clearAllElements(selector){
@@ -172,19 +173,77 @@ function addProject(){
 
   if (input==="") {
     
-    
-    inputBoxcreateProjects.doneButton.preventDefault();
+  
+   
 
     return
   }
 
-
+  inputBoxcreateProjects.dialogBox.close();
 }
 
 
 inputBoxcreateProjects.doneButton.addEventListener('click',function (e) {
   
   addProject();
+  e.preventDefault();
+ 
+  
+   
+  
  
 });
 
+let createTaskDialog=(()=>{
+ 
+  let dialogTask=domElementMaker('dialog',"dialogTask",document.body);
+  let RequirementsForm=domElementMaker('form',"messageBoxdiv",dialogTask)
+
+  let TaskLabel=domElementMaker('label','DateLabel',RequirementsForm,"Task Name");
+  TaskLabel.setAttribute("for","TaskName")
+  let TaskName=domElementMaker('input',"TaskName",RequirementsForm,null,"Race the sun with Lisa")
+    
+  let DescriptionLabel=domElementMaker('label','DateLabel',RequirementsForm,"Description");
+  DescriptionLabel.setAttribute("for","TaskDescription")
+  let TaskDescription=domElementMaker('textarea',"TaskDescription",RequirementsForm,null,"Take the mars rover")
+  TaskDescription.rows=4;
+
+  let dateLabel=domElementMaker('label','DateLabel',RequirementsForm,"Due Date");
+  dateLabel.setAttribute("for","Date")
+
+  let date=domElementMaker('input','Date',RequirementsForm,"Date","Due Date");
+  date.type="date"; 
+
+  let PriorityLabel=domElementMaker('label',"PriorityLabel",RequirementsForm,"Priority");
+
+  let PriorityDropdown=domElementMaker('select',"selectDropDown",RequirementsForm)
+  let OptionHigh=domElementMaker('option',"optionHigh",PriorityDropdown,"High");
+  let OptionMedium=domElementMaker('option',"optionMedium",PriorityDropdown,"Medium")
+  let OptionLow=domElementMaker('option',"optionLow",PriorityDropdown,"Low")
+
+  OptionHigh.setAttribute("value","High");
+  OptionMedium.setAttribute("value","Medium");
+  OptionLow.setAttribute("value","Low");
+  OptionMedium.selected=true;
+
+  TaskName.required=true;
+  PriorityDropdown.required=true;
+  date.required=true;
+  TaskDescription.required=true;
+  
+  
+let buttonHolder=domElementMaker('div',"buttonHolder",dialogTask)
+let cancelTask=domElementMaker('button',"cancelTask",buttonHolder,"Cancel")
+let createlTask=domElementMaker('button',"createTask",buttonHolder,"Create")
+
+
+
+
+return {dialogTask}
+})();
+
+
+createTaskicon.addTask.addEventListener('click',function (e) {
+  createTaskDialog.dialogTask.showModal();
+  
+})
