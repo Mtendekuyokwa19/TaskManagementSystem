@@ -1,6 +1,6 @@
 
 
-let allMaterials=(()=>{
+export let allMaterials=(()=>{
 
     let allProjects=[];
     let allTasks=[];
@@ -11,14 +11,14 @@ return {allProjects,allTasks}
 })()
 
 
-let ProjectManagement=(()=>{
+export let ProjectManagement=(()=>{
 
     class createProject{
 
         constructor(projectTitle){
-    
+            this.projectTitle=projectTitle;
             this.projectList=[];
-            this.projectName=projectTitle;
+            console.log(projectTitle);
     
     
     
@@ -33,7 +33,7 @@ let ProjectManagement=(()=>{
     }
 
     function addToAllProjects(NewProject) {
-        allProjects[allMaterials.allProjects.length]=NewProject;
+        allMaterials.allProjects[allMaterials.allProjects.length]=NewProject;
         
     }
 
@@ -57,14 +57,16 @@ return{FindProject,createProject,addToAllProjects}
 })() 
 
 
-let TaskManagement=(()=>{
+export let TaskManagement=(()=>{
 
     class createTask{
 
 
-        constructor(title,priority){
+        constructor(title,description,date,priority){
     
             this.title=title;
+            this.description=description;
+            this.date=date;
             this.priority=priority;
     
     
@@ -75,11 +77,12 @@ let TaskManagement=(()=>{
     
     }
 
-    function addingTask(ProjectName,newTask){
+    function addingTask(newTask,project=spaceTravels){
 
-    
-
-        FindProject(ProjectName)[ FindProject(ProjectName).length]=newTask;
+        
+        allMaterials.allTasks[allMaterials.allTasks.length]=newTask
+        // project.projectList[project.projectList.length]=newTask;
+        // FindProject(ProjectName)[ FindProject(ProjectName).length]=newTask;
     
     
     }
@@ -140,7 +143,7 @@ function placeTaskinAllTasks() {
 
 
 
-
-
-
+//creating default 
+let spaceTravels=new ProjectManagement.createProject("space trip");
+ProjectManagement.addToAllProjects(spaceTravels);
 
