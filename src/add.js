@@ -82,7 +82,7 @@ export let TaskManagement=(()=>{
         
         allMaterials.allTasks[allMaterials.allTasks.length]=newTask
         // project.projectList[project.projectList.length]=newTask;
-        // FindProject(ProjectName)[ FindProject(ProjectName).length]=newTask;
+        FindProject(project)[ FindProject(project).length]=newTask;
     
     
     }
@@ -134,6 +134,7 @@ function placeTaskinAllTasks() {
     }
     
 }
+
 
 
 

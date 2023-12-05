@@ -17,68 +17,73 @@ import { ProjectManagement } from './add.js'
 import { allMaterials } from './add.js'
 import { spaceTravels } from './add.js'
 import { TaskManagement } from './add.js'
+import briefcaseProjects from './icons/briefcase-outline.svg'
+import messageIcon from './icons/message-outline.svg'
 
+class createElementtoDom{
 
+  domElementCreator(type,newId,parentBox,Words="",placeholderWords=""){
+    let newElement=document.createElement(type)
+    newElement.id=newId;
+    newElement.textContent=Words
+    newElement.placeholder=placeholderWords;
+    parentBox.appendChild(newElement);
+    
+    return newElement;
+    
+    }
+    ImageLoadtoDOm(Icon,parentBox,idName) {
+    
+      let myIcon = new Image();
+      myIcon.src = Icon;
+      myIcon.id=idName;
+      parentBox.appendChild(myIcon);
+    
+      return myIcon;
+        
+    }
+    
 
-export function domElementMaker(type,name,parentBox,Words="",placeholderWords=""){
-
-let newElement=document.createElement(type);
-newElement.id=name;
-newElement.textContent=Words
-newElement.placeholder=placeholderWords;
-parentBox.appendChild(newElement);
-
-return newElement;
 
 }
 
-export function domImageLoad(Icon,parentBox,idName) {
-    
-  let myIcon = new Image();
-  myIcon.src = Icon;
-  myIcon.id=idName;
-  parentBox.appendChild(myIcon);
+let domElementMaker=new createElementtoDom();
 
-  return myIcon;
-    
-}
+
 
 export let sidebar=(()=>{
 
-let siderbox=domElementMaker('div',"sidebox",document.body);
+let siderbox=domElementMaker.domElementCreator('div',"sidebox",document.body);
 
-let appTitleHolder=domElementMaker('div',"appTitleHolder",siderbox);
+let appTitleHolder=domElementMaker.domElementCreator('div',"appTitleHolder",siderbox);
 
-let appLogo=domImageLoad(HeadImage,appTitleHolder,"appLogo")
+let appLogo=domElementMaker.ImageLoadtoDOm(HeadImage,appTitleHolder,"appLogo")
 
-let appTitle=domElementMaker('p',"appTitle",appTitleHolder,"Ubuntu Tasks");
+let appTitle=domElementMaker.domElementCreator('p',"appTitle",appTitleHolder,"Ubuntu Tasks");
 
 
 
-let sectionTitle=domElementMaker('p',"sectionTitle",siderbox,"MAIN")
-let section=domElementMaker('div',"section",siderbox)
 
-let homeButton=domElementMaker('button',"homeDiv",section);
-let homeicon=domImageLoad(HomeIcon,homeButton,"homeicon")
-let homeText=domElementMaker('p',"hometext",homeButton,"Home");
+let section=domElementMaker.domElementCreator('div',"section",siderbox)
 
-// let AllTasksButton=domElementMaker('button',"AllTasks",section);
-// let AllTasksicon=domImageLoad(allTasksicon,AllTasksButton,"AllTaskicon")
-// let AllTasksText=domElementMaker('p',"hometext",AllTasksButton,"Tasks");
+let homeButton=domElementMaker.domElementCreator('button',"homeDiv",section);
+let homeicon=domElementMaker.ImageLoadtoDOm(HomeIcon,homeButton,"homeicon")
+let homeText=domElementMaker.domElementCreator('p',"hometext",homeButton,"Home");
 
-let DatesArrangedButton=domElementMaker('button',"calender",section);
-let Datesicon=domImageLoad(dateIcon,DatesArrangedButton,"Datesicon")
-let DatesText=domElementMaker('p',"hometext",DatesArrangedButton,"Calender");
 
-let ProjectsButton=domElementMaker('button',"Projects",section);
-let ProjectsIcon=domImageLoad(projectsIcon,ProjectsButton,"projectIcon")
-let ProjectsText=domElementMaker('p',"ProjectText",ProjectsButton,"Projects")
+let DatesArrangedButton=domElementMaker.domElementCreator('button',"calender",section);
+let Datesicon=domElementMaker.ImageLoadtoDOm(dateIcon,DatesArrangedButton,"Datesicon")
+let DatesText=domElementMaker.domElementCreator('p',"hometext",DatesArrangedButton,"Calender");
 
-let divProjectsSection=domElementMaker('div',"projectsSection",section)
+let ProjectsButton=domElementMaker.domElementCreator('button',"Projects",section);
+let ProjectsIcon=domElementMaker.ImageLoadtoDOm(projectsIcon,ProjectsButton,"projectIcon")
+let ProjectsText=domElementMaker.domElementCreator('p',"ProjectText",ProjectsButton,"Projects")
 
- let createprojectsButton=domElementMaker('button',"createprojects",section);
-let createProjectsIcon=domImageLoad(createProjectsicon,createprojectsButton,"createprojectsicon")
-let createProject=domElementMaker('p',"projectText",createprojectsButton,"Create Projects");
+let divProjectsSection=domElementMaker.domElementCreator('div',"projectsSection",section)
+
+ let createprojectsButton=domElementMaker.domElementCreator('button',"createprojects",section);
+let createProjectsIcon=domElementMaker.ImageLoadtoDOm(createProjectsicon,createprojectsButton,"createprojectsicon")
+let createProject=domElementMaker.domElementCreator('p',"projectText",createprojectsButton,"Create Projects");
 createprojectsButton.title="Create Project"
 
 
@@ -104,12 +109,12 @@ return {createprojectsButton,siderbox,divProjectsSection};
 
 export let topBar=(()=>{
 
-  let topBox=domElementMaker('div','topBox',document.body);
+  let topBox=domElementMaker.domElementCreator('div','topBox',document.body);
  
-  let topText=domElementMaker('p','topText',topBox,`Enjoy your ${format(new Date(), 'EEEE')}`)
-  let topBoximage=domImageLoad(topBoxImage,topBox,'topBoximagegirl');
-  let musicpic=domImageLoad(musicimage,topBox,"musicboy")
-  let boywithpapers=domImageLoad(boypapers,topBox,"boyWithpapers");
+  let topText=domElementMaker.domElementCreator('p','topText',topBox,`Enjoy your ${format(new Date(), 'EEEE')}`)
+  let topBoximage=domElementMaker.ImageLoadtoDOm(topBoxImage,topBox,'topBoximagegirl');
+  let musicpic=domElementMaker.ImageLoadtoDOm(musicimage,topBox,"musicboy")
+  let boywithpapers=domElementMaker.ImageLoadtoDOm(boypapers,topBox,"boyWithpapers");
 
 
 
@@ -118,10 +123,10 @@ export let topBar=(()=>{
 
 export let createTaskicon=(()=>{
 
-  let addTask=domElementMaker('button',"addTask",document.body)
+  let addTask=domElementMaker.domElementCreator('button',"addTask",document.body)
   addTask.title="Create new task"
 
-  let addTaskIcon=domImageLoad(addTaskImage,addTask,"addtaskicon")
+  let addTaskIcon=domElementMaker.ImageLoadtoDOm(addTaskImage,addTask,"addtaskicon")
 
 
 
@@ -130,19 +135,18 @@ return {addTask}
 
 
 
-
 let inputBoxcreateProjects=(()=>{
-  let dialogBox=domElementMaker('dialog',"dialogCreateProject",sidebar.siderbox);
-  let messageBoxdiv=domElementMaker('form',"messageBoxdiv",dialogBox)
-  let ProjectNamelabel=domElementMaker('label',"projectName",messageBoxdiv)
+  let dialogBox=domElementMaker.domElementCreator('dialog',"dialogCreateProject",sidebar.siderbox);
+  let messageBoxdiv=domElementMaker.domElementCreator('form',"messageBoxdiv",dialogBox)
+  let ProjectNamelabel=domElementMaker.domElementCreator('label',"projectName",messageBoxdiv)
   ProjectNamelabel.setAttribute("for","projectNameinput");
-  let projectNameinput=domElementMaker('input',"projectNameinput",messageBoxdiv)
+  let projectNameinput=domElementMaker.domElementCreator('input',"projectNameinput",messageBoxdiv)
   projectNameinput.placeholder="Go to the Moon";
 
-  let buttonsdiv=domElementMaker('div',"buttondiv",messageBoxdiv)
+  let buttonsdiv=domElementMaker.domElementCreator('div',"buttondiv",messageBoxdiv)
 
-  let cancelButton=domElementMaker('button',"cancelButton",buttonsdiv,"Cancel")
-  let doneButton=domElementMaker('button',"doneButton",buttonsdiv,"Create")
+  let cancelButton=domElementMaker.domElementCreator('button',"cancelButton",buttonsdiv,"Cancel")
+  let doneButton=domElementMaker.domElementCreator('button',"doneButton",buttonsdiv,"Create")
 
   
 return {dialogBox,cancelButton,doneButton,projectNameinput}
@@ -176,6 +180,7 @@ holderContainer.forEach(element => {
 
 
 }
+
 function fromDomtoAllprojects()
 {
   if (inputBoxcreateProjects.projectNameinput.value===""){
@@ -197,13 +202,16 @@ createButtonsFromAllProjects();
 
 }
 
+function balancingprojects(){
+  addProject();
+  UpdateNumberOfProjects();
+
+}
 
 inputBoxcreateProjects.doneButton.addEventListener('click',function (e) {
   
-  addProject();
-  console.log("yes")
+  balancingprojects();
   e.preventDefault();
-  
   inputBoxcreateProjects.dialogBox.close();
   
    
@@ -213,30 +221,30 @@ inputBoxcreateProjects.doneButton.addEventListener('click',function (e) {
 
 let createTaskDialog=(()=>{
  
-  let dialogTask=domElementMaker('dialog',"dialogTask",document.body);
-  let RequirementsForm=domElementMaker('form',"messageBoxdiv",dialogTask)
+  let dialogTask=domElementMaker.domElementCreator('dialog',"dialogTask",document.body);
+  let RequirementsForm=domElementMaker.domElementCreator('form',"messageBoxdiv",dialogTask)
 
-  let TaskLabel=domElementMaker('label','DateLabel',RequirementsForm,"Task Name");
+  let TaskLabel=domElementMaker.domElementCreator('label','DateLabel',RequirementsForm,"Task Name");
   TaskLabel.setAttribute("for","TaskName")
-  let TaskName=domElementMaker('input',"TaskName",RequirementsForm,null,"Venus summit")
+  let TaskName=domElementMaker.domElementCreator('input',"TaskName",RequirementsForm,null,"Venus summit")
     
-  let DescriptionLabel=domElementMaker('label','DateLabel',RequirementsForm,"Description");
+  let DescriptionLabel=domElementMaker.domElementCreator('label','DateLabel',RequirementsForm,"Description");
   DescriptionLabel.setAttribute("for","TaskDescription")
-  let TaskDescription=domElementMaker('textarea',"TaskDescription",RequirementsForm,null,"Take the mars rover at ubuntu station ")
+  let TaskDescription=domElementMaker.domElementCreator('textarea',"TaskDescription",RequirementsForm,null,"Take the mars rover at ubuntu station ")
   TaskDescription.rows=4;
 
-  let dateLabel=domElementMaker('label','DateLabel',RequirementsForm,"Due Date");
+  let dateLabel=domElementMaker.domElementCreator('label','DateLabel',RequirementsForm,"Due Date");
   dateLabel.setAttribute("for","Date")
 
-  let date=domElementMaker('input','Date',RequirementsForm,"Date","Due Date");
+  let date=domElementMaker.domElementCreator('input','Date',RequirementsForm,"Date","Due Date");
   date.type="date"; 
 
-  let PriorityLabel=domElementMaker('label',"PriorityLabel",RequirementsForm,"Priority");
+  let PriorityLabel=domElementMaker.domElementCreator('label',"PriorityLabel",RequirementsForm,"Priority");
   PriorityLabel.setAttribute("for","selectDropDown")
-  let PriorityDropdown=domElementMaker('select',"selectDropDown",RequirementsForm)
-  let OptionHigh=domElementMaker('option',"optionHigh",PriorityDropdown,"High");
-  let OptionMedium=domElementMaker('option',"optionMedium",PriorityDropdown,"Medium")
-  let OptionLow=domElementMaker('option',"optionLow",PriorityDropdown,"Low")
+  let PriorityDropdown=domElementMaker.domElementCreator('select',"selectDropDown",RequirementsForm)
+  let OptionHigh=domElementMaker.domElementCreator('option',"optionHigh",PriorityDropdown,"High");
+  let OptionMedium=domElementMaker.domElementCreator('option',"optionMedium",PriorityDropdown,"Medium")
+  let OptionLow=domElementMaker.domElementCreator('option',"optionLow",PriorityDropdown,"Low")
 
   OptionHigh.setAttribute("value","High");
   OptionMedium.setAttribute("value","Medium");
@@ -249,9 +257,9 @@ let createTaskDialog=(()=>{
   TaskDescription.required=true;
   
   
-let buttonHolder=domElementMaker('div',"buttonHolder",dialogTask)
-let cancelTask=domElementMaker('button',"cancelTask",buttonHolder,"Cancel")
-let createTask=domElementMaker('button',"createTask",buttonHolder,"Create")
+let buttonHolder=domElementMaker.domElementCreator('div',"buttonHolder",dialogTask)
+let cancelTask=domElementMaker.domElementCreator('button',"cancelTask",buttonHolder,"Cancel")
+let createTask=domElementMaker.domElementCreator('button',"createTask",buttonHolder,"Create")
 createTask.type="Submit";
 
 
@@ -326,7 +334,7 @@ function createButtonsFromAllProjects(){
   let arrayOfprojects=allMaterials.allProjects;
 
 for (let i = 0; i < arrayOfprojects.length; i++) {
- let button=domElementMaker('button',"project"+i+" ",sidebar.divProjectsSection,"> "+arrayOfprojects[i].projectTitle)
+ let button=domElementMaker.domElementCreator('button',"project"+i+" ",sidebar.divProjectsSection,"> "+arrayOfprojects[i].projectTitle)
   button.className="projectName" ;
 }
 
@@ -341,3 +349,66 @@ function closeAddtask() {
   
 }
 
+let contentTobeupdatedChangingProjects=(()=>{
+
+let content=domElementMaker.domElementCreator('div','contentTobeUpdated',document.body)
+
+
+
+return {content};
+})()
+
+
+
+
+  function contentBoxelementMaker(type,newId,parentBox,Words="",placeholderWords="",classTitle="contentToRemove"){
+    let element=domElementMaker.domElementCreator(type,newId,parentBox,Words,placeholderWords="")
+    element.className=classTitle;
+
+    return element;
+  }
+
+
+
+
+
+
+
+
+
+let statistics=(()=>{
+
+  let statisticsHolderbox=contentBoxelementMaker('div',"statisticsHolderbox",contentTobeupdatedChangingProjects.content)
+  let cardNames=["Current Projects","Current Tasks","Completed Tasks"];
+  let namesOfStats=["informationOfProjectsHolder","infomationOfTasksHolder","informationOfcompletedTasksHolder"]
+  let cardDetails=["projectNumber","TaskNumber","completedNumber"]
+  let icons=[briefcaseProjects,messageIcon,allTasksicon]
+  let idNames=["numberOfProjectsdiv","numberOfTasksdiv","completedTasks"]
+  let staticsOfcard=[allMaterials.allProjects.length,allMaterials.allTasks.length,0]
+  let specificNameforEntry=["projectDetails","TaskDetails","completedTask"];
+  let backdrops=["projectsBackdrop","tasksBackdrop","completedBackdrop"]
+  
+for (let i = 0; i < cardNames.length; i++) {
+  let cardDIV=contentBoxelementMaker('div',idNames[i],statisticsHolderbox);
+  let informationHolder=contentBoxelementMaker('div',namesOfStats[i],cardDIV);
+  let infoOfCard=contentBoxelementMaker('p',cardDetails[i],informationHolder,staticsOfcard[i]);
+  let ProjectDetails=contentBoxelementMaker('p',specificNameforEntry[i],informationHolder,cardNames[i]);
+  let IconDiv=contentBoxelementMaker('div',"iconDiv",cardDIV);
+  let iconImage=domElementMaker.ImageLoadtoDOm(icons[i],IconDiv,"iconStatics");
+  let iconImageBackdrop=domElementMaker.domElementCreator('div',backdrops[i],IconDiv)
+}
+  
+  
+
+  
+  
+ 
+  
+
+})()
+
+function UpdateNumberOfProjects() {
+  let ProjectNumber=document.querySelector('#projectNumber')
+  ProjectNumber.textContent=allMaterials.allProjects.length;
+  
+}

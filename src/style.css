@@ -1,8 +1,8 @@
 
-  @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Quicksand:wght@500&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Quicksand:wght@500&family=Satisfy&display=swap');
 
-
-*{
+  
+  *{
 
     padding: 0px;
     margin: 0px;
@@ -17,11 +17,11 @@
 
 }
 body{
-background-color: #1c1c1c;
+background-color: #0f0e13;
 
 display: grid;
 grid-template-columns: 250px repeat(4,1fr);
-grid-template-rows:repeat(4,1fr) ;
+grid-template-rows:repeat(7,1fr) ;
 height: 100vh;
 color: white;
 
@@ -31,7 +31,8 @@ color: white;
 #sidebox{
 
   
-    grid-area:1/1/-1/1;
+    grid-column: 1/1;
+    grid-row: 1/-1;
     background-color: #161a23;
   
  
@@ -47,11 +48,13 @@ display: flex;
 
 align-items: center;
 
-background-color: #333333;
+background-color: #161a23;
+
+border-bottom: solid 0.5px  #40485a;
 
 
 padding: 22px;
-height: 150px;
+height: 100px;
 
 
 
@@ -85,8 +88,9 @@ font-weight: bold;
 
     display: flex;
     flex-direction: column;
-
-    gap: 8px;
+   
+    gap: 12px;
+    margin-top: 12px;
 
 }
 #section>button{
@@ -103,7 +107,8 @@ font-weight: bold;
     padding-left: 26px;
     text-align: right;
     align-items: center;
-    font-weight: bold;
+   
+   
 }
 
 #section>button:last-child{
@@ -114,7 +119,7 @@ height: 50px;
 color:white;
 width: 200px;
 
-margin-left: 30px;
+margin-left: 21px;
 
 }
 #section>button:hover{
@@ -135,7 +140,7 @@ margin-left: 30px;
 #topBoximagegirl,#musicboy,#boyWithpapers{
 
 
-height: 150px;
+height: 100px;
 
 
 
@@ -144,7 +149,7 @@ height: 150px;
 }
 #topBoximagegirl{
 
-    margin-left:12px ;
+    margin-left:111px ;
 }
 
 
@@ -155,14 +160,15 @@ grid-column-end: 6;
 background-color: #3754DB;
 display: flex;
 gap:10px;
-height:150px ;
+height:100px ;
 
 
 
 
 }
 #topText{
-    font-family: 'Indie Flower', cursive;
+  
+  font-family: 'Satisfy', cursive;
 align-self: center;
 font-size: 50px;
 font-weight: bold;
@@ -172,9 +178,9 @@ margin: 12px;
 
 width: 70px;
 height: 70px;
-position: relative;
-top:270px;
-left:950px;
+position: absolute;
+top:440px;
+left:1178px;
 background-color: #3754DB;
 
 border: none;
@@ -361,3 +367,95 @@ padding: 0px 10px;
 
 
   }
+  #contentTobeUpdated{
+
+    /* border: solid 3px red; */
+   
+    grid-column: 2/-1;
+    grid-row: 2/-1;
+
+
+
+  }
+  #statisticsHolderbox{
+
+    
+    height: 100px;
+    margin: 20px 0px 0px 10px;
+    display: flex;
+    gap: 76px;
+    justify-content: center;
+
+  }
+
+  #informationOfProjectsHolder{
+
+    display: flex;
+    flex-direction: column;
+
+
+
+
+  }
+  #informationOfProjectsHolder p:first-child,#TaskNumber,#completedNumber{
+
+    font-size: 34px;
+
+
+  }
+  #statisticsHolderbox>div{
+
+display: flex;
+
+width: 300px;
+height: inherit;
+padding: 15px;
+border-radius: 8px;
+justify-content: space-evenly;
+background-color: #161a23;
+
+
+ }
+ #projectsBackdrop,#tasksBackdrop,#completedBackdrop{
+
+opacity: 15%;
+border-radius:100% ;
+width: 60px;
+height: 60px;
+
+
+
+
+
+
+ }
+ #projectsBackdrop{
+  background-color: #a803e4;
+
+
+ }
+ #tasksBackdrop{
+  background-color:#F39C12 ;
+ }
+
+ #completedBackdrop{
+
+  background-color: #27AE60;
+
+ }
+ 
+ #iconDiv{
+
+display: flex;
+justify-content: center;
+
+
+ }
+ #iconDiv img{
+  width:32px;
+  height:30px; 
+  position: relative;
+left: 46px;
+top:15px
+ }
+
