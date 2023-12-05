@@ -62,12 +62,13 @@ export let TaskManagement=(()=>{
     class createTask{
 
 
-        constructor(title,description,date,priority){
+        constructor(title,description,date,priority,status="pending"){
     
             this.title=title;
             this.description=description;
             this.date=date;
             this.priority=priority;
+            this.status=status;
     
     
     
@@ -82,7 +83,7 @@ export let TaskManagement=(()=>{
         
         allMaterials.allTasks[allMaterials.allTasks.length]=newTask
         // project.projectList[project.projectList.length]=newTask;
-        FindProject(project)[ FindProject(project).length]=newTask;
+        // FindProject(project)[ FindProject(project).length]=newTask;
     
     
     }

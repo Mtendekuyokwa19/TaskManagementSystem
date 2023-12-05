@@ -11,6 +11,10 @@ module.exports = {
       import: './src/add.js',
       dependOn: 'shared',
     },
+    Dom:{
+      import:'./src/Dom.js',
+      dependOn:'shared'
+    },
     shared: 'date-fns',
    },
    optimization: {
