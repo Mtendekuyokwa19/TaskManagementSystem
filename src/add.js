@@ -18,7 +18,7 @@ export let ProjectManagement=(()=>{
         constructor(projectTitle){
             this.projectTitle=projectTitle;
             this.projectList=[];
-            console.log(projectTitle);
+           
     
     
     

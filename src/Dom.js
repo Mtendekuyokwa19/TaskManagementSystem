@@ -1,7 +1,7 @@
 //creating the DOM
 
 import './style.css'
-
+import { allTaskinproject } from './project.js'
 import HeadImage from'./icons/linuxHead.png'
 import HomeIcon from './icons/HomeButtons.svg'
 import allTasksicon from './icons/Tasks.svg'
@@ -211,6 +211,7 @@ function balancingprojects(){
 inputBoxcreateProjects.doneButton.addEventListener('click',function (e) {
   
   balancingprojects();
+  projectButtons()
   e.preventDefault();
   inputBoxcreateProjects.dialogBox.close();
   
@@ -282,7 +283,7 @@ createTaskDialog.dialogTask.close()
 
 createTaskDialog.cancelTask.addEventListener('click',function (e) {
   closeTaskdialog();
-  
+  e.preventDefault();
 })
 
 function addTask(){
@@ -309,6 +310,7 @@ function enterTask() {
 createTaskDialog.createTask.addEventListener('click',function (e) {
 
   enterTask();
+
   
 })
 
@@ -316,6 +318,7 @@ createTaskDialog.createTask.addEventListener('click',function (e) {
 
 inputBoxcreateProjects.cancelButton.addEventListener('click',function(e) {
   createButtonsFromAllProjects();
+  
   e.preventDefault();
   
   inputBoxcreateProjects.dialogBox.close();
@@ -340,7 +343,7 @@ function createButtonsFromAllProjects(){
   let arrayOfprojects=allMaterials.allProjects;
 
 for (let i = 0; i < arrayOfprojects.length; i++) {
- let button=domElementMaker.domElementCreator('button',"project"+i+" ",sidebar.divProjectsSection,"> "+arrayOfprojects[i].projectTitle)
+ let button=domElementMaker.domElementCreator('button',"project",sidebar.divProjectsSection,"> "+arrayOfprojects[i].projectTitle)
   button.className="projectName" ;
 }
 
@@ -478,3 +481,26 @@ function updateAlltasks() {
   let numberOftasks=document.querySelector('#TaskNumber')
   numberOftasks.textContent=allMaterials.allTasks.length;
 }
+
+ function projectButtons(){
+  let allprojectButtons=document.querySelectorAll('#project');
+ 
+  let index=0;
+  allprojectButtons.forEach(projectButton=>{
+   
+    
+
+      allTaskinproject(projectButton,index);
+     index++;
+
+    
+
+    
+
+
+  })
+
+
+}
+
+projectButtons();

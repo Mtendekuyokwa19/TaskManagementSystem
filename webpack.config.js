@@ -3,14 +3,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
-    index: {
-      import: './src/index.js',
-      dependOn: 'shared',
-    },
-    add: {
-      import: './src/add.js',
-      dependOn: 'shared',
-    },
     Dom:{
       import:'./src/Dom.js',
       dependOn:'shared'
