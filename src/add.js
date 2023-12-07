@@ -38,7 +38,7 @@ export let ProjectManagement=(()=>{
     }
 
     function FindProject(ProjectName) {
-        for (let i = 0; i < allProjects.length; i++) {
+        for (let i = 0; i < allMaterials.allProjects.length; i++) {
         
         if(ProjectName===allMaterials.allProjects[i].projectName)
      
@@ -46,7 +46,8 @@ export let ProjectManagement=(()=>{
              
              return allProjects[i].projectList;
         }
-         
+    
+        return
      }
 
 
@@ -78,15 +79,7 @@ export let TaskManagement=(()=>{
     
     }
 
-    function addingTask(newTask,project=spaceTravels){
-
-        
-        allMaterials.allTasks[allMaterials.allTasks.length]=newTask
-        // project.projectList[project.projectList.length]=newTask;
-        // FindProject(project)[ FindProject(project).length]=newTask;
-    
-    
-    }
+   
 
     function findingTask(TaskName){
 
@@ -110,11 +103,19 @@ export let TaskManagement=(()=>{
     
     
     }
+   function addTasktoProject(task,project=allMaterials.allProjects[0].projectList){
+
+        project[project.length]=task;
+        allMaterials.allTasks[allMaterials.allTasks.length]=task;
+        
+        
+        
+        
+        }
 
 
 
-
-return {createTask,addingTask,findingTask}
+return {createTask,findingTask,addTasktoProject}
 
 
 })()
@@ -146,6 +147,6 @@ function placeTaskinAllTasks() {
 
 
 //creating default 
-let spaceTravels=new ProjectManagement.createProject("space trip");
+export let spaceTravels=new ProjectManagement.createProject("space trip");
 ProjectManagement.addToAllProjects(spaceTravels);
 

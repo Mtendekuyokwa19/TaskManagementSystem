@@ -1,7 +1,7 @@
 //creating the DOM
 
 import './style.css'
-import { allTaskinproject } from './project.js'
+import { Taskineachproject } from './project.js'
 import HeadImage from'./icons/linuxHead.png'
 import HomeIcon from './icons/HomeButtons.svg'
 import allTasksicon from './icons/Tasks.svg'
@@ -19,6 +19,7 @@ import { spaceTravels } from './add.js'
 import { TaskManagement } from './add.js'
 import briefcaseProjects from './icons/briefcase-outline.svg'
 import messageIcon from './icons/message-outline.svg'
+
 
 class createElementtoDom{
 
@@ -220,6 +221,39 @@ inputBoxcreateProjects.doneButton.addEventListener('click',function (e) {
  
 });
 
+export let stylingSlelectedButtons=(()=>{
+  function makingTheButtonGlow(button){
+
+   button.style.setProperty("color","white")
+   button.style.setProperty("background-color","#F39C12")
+   button.style.setProperty("text-align","center");
+   
+   
+   }
+   
+  function returnAllbuttonstlyesTodefault(){
+   
+     let allButtons=document.querySelectorAll('#project');
+   
+   allButtons.forEach(Button=>{
+   
+   Button.style.setProperty("background-color","transparent");
+   Button.style.setProperty("color","#828489");
+   Button.style.setProperty("text-align","left");
+   
+   })
+   
+   
+   
+   }
+
+
+
+
+
+return{returnAllbuttonstlyesTodefault,makingTheButtonGlow}
+})() 
+
 let createTaskDialog=(()=>{
  
   let dialogTask=domElementMaker.domElementCreator('dialog',"dialogTask",document.body);
@@ -293,7 +327,7 @@ function addTask(){
     return 
   }
 let newTask=new TaskManagement.createTask(createTaskDialog.TaskName.value,createTaskDialog.TaskDescription.value,createTaskDialog.date.value,createTaskDialog.PriorityDropdown.value)
-TaskManagement.addingTask(newTask)
+TaskManagement.addTasktoProject(newTask);
 
 console.log(allMaterials.allTasks);
 createTaskDialog.dialogTask.close();
@@ -344,7 +378,11 @@ function createButtonsFromAllProjects(){
 
 for (let i = 0; i < arrayOfprojects.length; i++) {
  let button=domElementMaker.domElementCreator('button',"project",sidebar.divProjectsSection,"> "+arrayOfprojects[i].projectTitle)
-  button.className="projectName" ;
+ if(i===0){
+    stylingSlelectedButtons.makingTheButtonGlow(button)
+ } 
+ button.className="projectName" ;
+
 }
 
 
@@ -482,6 +520,15 @@ function updateAlltasks() {
   numberOftasks.textContent=allMaterials.allTasks.length;
 }
 
+export let defaultProjectButton=(()=>{
+  let projectButton=document.querySelectorAll('#project');
+
+  let defaultProject=projectButton[0]
+
+
+return{defaultProject}
+})()
+
  function projectButtons(){
   let allprojectButtons=document.querySelectorAll('#project');
  
@@ -489,8 +536,8 @@ function updateAlltasks() {
   allprojectButtons.forEach(projectButton=>{
    
     
-
-      allTaskinproject(projectButton,index);
+      let TaskPlacing=new Taskineachproject(projectButton,index)
+      
      index++;
 
     
@@ -504,3 +551,5 @@ function updateAlltasks() {
 }
 
 projectButtons();
+
+
