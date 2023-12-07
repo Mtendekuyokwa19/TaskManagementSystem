@@ -3,14 +3,13 @@ import { allMaterials } from "./add";
 import { spaceTravels } from "./add.js";
 import { ProjectManagement } from "./add";
 import { stylingSlelectedButtons } from "./Dom.js";
+import { movingfromOneprojecttoanother } from "./Dom.js";
+import { projectButtonActionsTogiveTasks } from "./Dom.js";
+import { TaskManagement } from "./add";
 
 function shiftProject(position){
-        
-    let temp=allMaterials.allProjects[0];
-    allMaterials.allProjects[0]=allMaterials.allProjects[position];
-    allMaterials.allProjects[position]=temp;
-
-    console.log(allMaterials.allProjects)
+      console.log(position);  
+      TaskManagement.projectPos.position=position;
 }
 
 export class Taskineachproject{
@@ -22,6 +21,9 @@ export class Taskineachproject{
            shiftProject(index)
            stylingSlelectedButtons.returnAllbuttonstlyesTodefault();
            stylingSlelectedButtons.makingTheButtonGlow(projectButton);
+           movingfromOneprojecttoanother.refreshTaskBox();
+           projectButtonActionsTogiveTasks.createTaskBoxforProject();
+           projectButtonActionsTogiveTasks.navigatingTheProjectAndGivingTasks(index);
             
             })
          
@@ -35,4 +37,4 @@ export class Taskineachproject{
 
 //import class and make default that
 
-console.log(ProjectManagement.FindProject( "space trip") )  
+

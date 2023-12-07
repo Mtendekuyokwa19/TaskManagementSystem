@@ -103,7 +103,10 @@ export let TaskManagement=(()=>{
     
     
     }
-   function addTasktoProject(task,project=allMaterials.allProjects[0].projectList){
+    let projectPos={
+        position:0
+    }
+   function addTasktoProject(task,project=allMaterials.allProjects[projectPos.position].projectList){
 
         project[project.length]=task;
         allMaterials.allTasks[allMaterials.allTasks.length]=task;
@@ -115,7 +118,7 @@ export let TaskManagement=(()=>{
 
 
 
-return {createTask,findingTask,addTasktoProject}
+return {createTask,findingTask,addTasktoProject,projectPos}
 
 
 })()

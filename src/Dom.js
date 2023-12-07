@@ -214,6 +214,7 @@ inputBoxcreateProjects.doneButton.addEventListener('click',function (e) {
   balancingprojects();
   projectButtons()
   e.preventDefault();
+  
   inputBoxcreateProjects.dialogBox.close();
   
    
@@ -337,8 +338,9 @@ createTaskDialog.dialogTask.close();
 
 function enterTask() {
   addTask();
-  placingTasks();
-  updateAlltasks();
+  movingTasks.placingTasks();
+  movingTasks.updateAlltasks()
+  
 }
 
 createTaskDialog.createTask.addEventListener('click',function (e) {
@@ -425,25 +427,28 @@ return {content};
 
 let statistics=(()=>{
 
-  let statisticsHolderbox=contentBoxelementMaker('div',"statisticsHolderbox",contentTobeupdatedChangingProjects.content)
-  let cardNames=["Current Projects","Current Tasks","Completed Tasks"];
-  let namesOfStats=["informationOfProjectsHolder","infomationOfTasksHolder","informationOfcompletedTasksHolder"]
-  let cardDetails=["projectNumber","TaskNumber","completedNumber"]
-  let icons=[briefcaseProjects,messageIcon,allTasksicon]
-  let idNames=["numberOfProjectsdiv","numberOfTasksdiv","completedTasks"]
-  let staticsOfcard=[allMaterials.allProjects.length,allMaterials.allTasks.length,0]
-  let specificNameforEntry=["projectDetails","TaskDetails","completedTask"];
-  let backdrops=["projectsBackdrop","tasksBackdrop","completedBackdrop"]
-  
-for (let i = 0; i < cardNames.length; i++) {
-  let cardDIV=contentBoxelementMaker('div',idNames[i],statisticsHolderbox);
-  let informationHolder=contentBoxelementMaker('div',namesOfStats[i],cardDIV);
-  let infoOfCard=contentBoxelementMaker('p',cardDetails[i],informationHolder,staticsOfcard[i]);
-  let ProjectDetails=contentBoxelementMaker('p',specificNameforEntry[i],informationHolder,cardNames[i]);
-  let IconDiv=contentBoxelementMaker('div',"iconDiv",cardDIV);
-  let iconImage=domElementMaker.ImageLoadtoDOm(icons[i],IconDiv,"iconStatics");
-  let iconImageBackdrop=domElementMaker.domElementCreator('div',backdrops[i],IconDiv)
-}
+  function makeStatistics() {
+    let statisticsHolderbox=contentBoxelementMaker('div',"statisticsHolderbox",contentTobeupdatedChangingProjects.content)
+    let cardNames=["Current Projects","Current Tasks","Completed Tasks"];
+    let namesOfStats=["informationOfProjectsHolder","infomationOfTasksHolder","informationOfcompletedTasksHolder"]
+    let cardDetails=["projectNumber","TaskNumber","completedNumber"]
+    let icons=[briefcaseProjects,messageIcon,allTasksicon]
+    let idNames=["numberOfProjectsdiv","numberOfTasksdiv","completedTasks"]
+    let staticsOfcard=[allMaterials.allProjects.length,allMaterials.allTasks.length,0]
+    let specificNameforEntry=["projectDetails","TaskDetails","completedTask"];
+    let backdrops=["projectsBackdrop","tasksBackdrop","completedBackdrop"]
+    
+  for (let i = 0; i < cardNames.length; i++) {
+    let cardDIV=contentBoxelementMaker('div',idNames[i],statisticsHolderbox);
+    let informationHolder=contentBoxelementMaker('div',namesOfStats[i],cardDIV);
+    let infoOfCard=contentBoxelementMaker('p',cardDetails[i],informationHolder,staticsOfcard[i]);
+    let ProjectDetails=contentBoxelementMaker('p',specificNameforEntry[i],informationHolder,cardNames[i]);
+    let IconDiv=contentBoxelementMaker('div',"iconDiv",cardDIV);
+    let iconImage=domElementMaker.ImageLoadtoDOm(icons[i],IconDiv,"iconStatics");
+    let iconImageBackdrop=domElementMaker.domElementCreator('div',backdrops[i],IconDiv)
+  }
+  }
+  makeStatistics();
   
   
 
@@ -451,7 +456,7 @@ for (let i = 0; i < cardNames.length; i++) {
   
  
   
-
+return{makeStatistics}
 })()
 
 function UpdateNumberOfProjects() {
@@ -459,7 +464,73 @@ function UpdateNumberOfProjects() {
   ProjectNumber.textContent=allMaterials.allProjects.length;
   
 }
+let movingTasks=(()=>{
+  function makeTaskbox() {
+    
+  let TaskBox=contentBoxelementMaker('div',"TaskBox",contentTobeupdatedChangingProjects.content)
+  return TaskBox
+  }
+ 
+  let taskcards=(({title,description,date,priority,status},TaskBox=document.querySelector('#TaskBox'))=>{
 
+    let taskDiv=contentBoxelementMaker('div',"TaskDiv",TaskBox)
+    
+    let dateDiv=contentBoxelementMaker('div',"dateDiv",taskDiv)
+  
+    let Date=contentBoxelementMaker('p',"daysRemaining",dateDiv,date);
+    let taskTitle=contentBoxelementMaker('p',"taskTitle",taskDiv,title);
+    let DescriptionTask=contentBoxelementMaker('p',"explainationTask",taskDiv,description)
+    let buttonsManipulationDiv=contentBoxelementMaker('div',"buttonsManipulationDiv",taskDiv)
+    let PriorityTag=contentBoxelementMaker('button',"Priotrity",buttonsManipulationDiv,priority)
+    let edit=contentBoxelementMaker('button',"editTask",buttonsManipulationDiv,"edit");
+    let complete=contentBoxelementMaker('button',"completeTask",buttonsManipulationDiv,status);
+    taskDiv.className="task";
+    dateDiv.className="task";
+    Date.className="task";
+    taskTitle.className="task";
+    DescriptionTask.className="task";
+    buttonsManipulationDiv.className="task";
+    PriorityTag.className="task";
+    edit.className="task";
+    complete.className="task";
+  
+  
+  
+  
+  
+  });
+  
+  function placingTasks() {
+    clearTaskBox();
+  
+    for (let i = 0; i < allMaterials.allProjects[TaskManagement.projectPos.position].projectList.length; i++) {
+      let task=allMaterials.allProjects[TaskManagement.projectPos.position].projectList[i];
+      console.log(task)
+      
+     taskcards(task);
+     
+    }
+    
+  }
+  
+  function clearTaskBox(){
+  
+    let allTaskscards=document.querySelectorAll('.task');
+    allTaskscards.forEach(allTaskscards=>{
+      allTaskscards.remove();
+    })
+  
+  
+  }
+  function updateAlltasks() {
+    let numberOftasks=document.querySelector('#TaskNumber')
+    // numberOftasks.textContent=allMaterials.allTasks.length;
+  }
+
+
+
+return{placingTasks,updateAlltasks,makeTaskbox,taskcards};
+})()
 let taskBoxtokeepTasks=(()=>{
 let TaskBox=contentBoxelementMaker('div',"TaskBox",contentTobeupdatedChangingProjects.content);
 
@@ -467,58 +538,7 @@ let TaskBox=contentBoxelementMaker('div',"TaskBox",contentTobeupdatedChangingPro
 return {TaskBox};
 })()
 
-let taskcards=(({title,description,date,priority,status})=>{
 
-  let taskDiv=contentBoxelementMaker('div',"TaskDiv",taskBoxtokeepTasks.TaskBox)
-  
-  let dateDiv=contentBoxelementMaker('div',"dateDiv",taskDiv)
-
-  let Date=contentBoxelementMaker('p',"daysRemaining",dateDiv,date);
-  let taskTitle=contentBoxelementMaker('p',"taskTitle",taskDiv,title);
-  let DescriptionTask=contentBoxelementMaker('p',"explainationTask",taskDiv,description)
-  let buttonsManipulationDiv=contentBoxelementMaker('div',"buttonsManipulationDiv",taskDiv)
-  let PriorityTag=contentBoxelementMaker('button',"Priotrity",buttonsManipulationDiv,priority)
-  let edit=contentBoxelementMaker('button',"editTask",buttonsManipulationDiv,"edit");
-  let complete=contentBoxelementMaker('button',"completeTask",buttonsManipulationDiv,status);
-  taskDiv.className="task";
-  dateDiv.className="task";
-  Date.className="task";
-  taskTitle.className="task";
-  DescriptionTask.className="task";
-  buttonsManipulationDiv.className="task";
-  PriorityTag.className="task";
-  edit.className="task";
-  complete.className="task";
-
-
-
-
-
-});
-
-function placingTasks() {
-  clearTaskBox();
-  for (let i = 0; i < allMaterials.allTasks.length; i++) {
-    let task=allMaterials.allTasks[i];
-   taskcards(task);
-    
-  }
-  
-}
-
-function clearTaskBox(){
-
-  let allTaskscards=document.querySelectorAll('.task');
-  allTaskscards.forEach(allTaskscards=>{
-    allTaskscards.remove();
-  })
-
-
-}
-function updateAlltasks() {
-  let numberOftasks=document.querySelector('#TaskNumber')
-  numberOftasks.textContent=allMaterials.allTasks.length;
-}
 
 export let defaultProjectButton=(()=>{
   let projectButton=document.querySelectorAll('#project');
@@ -552,4 +572,107 @@ return{defaultProject}
 
 projectButtons();
 
+export let movingfromOneprojecttoanother=(()=>{
 
+  function refreshTaskBox(){
+      let allElements=document.querySelectorAll('.contentToRemove');
+      allElements.forEach(element=>{
+
+        element.remove()
+
+      })
+      let alltasks=document.querySelectorAll('.task')
+      alltasks.forEach(element=>{
+
+        element.remove()
+      })
+      function TaskBoxcleanup() {
+        let TaskBox=document.querySelectorAll('#TaskBox')
+        TaskBox.forEach(TaskBox=>{
+          TaskBox.remove();
+      
+        })
+      }
+     TaskBoxcleanup();
+      
+
+
+  }
+
+
+
+return {refreshTaskBox,TaskBoxcleanup};
+})()
+
+
+let Homebutton=document.querySelector('#homeDiv');
+
+function homeButtonReset() {
+  movingfromOneprojecttoanother.refreshTaskBox();
+    statistics.makeStatistics();
+    movingTasks.makeTaskbox();
+    // movingTasks.placingTasks();
+    // movingTasks.updateAlltasks();
+    settingAlltasksinHome()
+}
+
+Homebutton.addEventListener('click',function(e){
+
+  homeButtonReset();
+
+})
+
+export let projectButtonActionsTogiveTasks=(()=>{
+
+
+  function createTaskBoxforProject(){
+
+    let TaskBoxforProject=domElementMaker.domElementCreator('div',"TaskBox",document.querySelector('#contentTobeUpdated'));
+    TaskBoxforProject.className=".contentToRemove";
+    
+    
+    return TaskBoxforProject
+    }
+
+  function navigatingTheProjectAndGivingTasks(index){
+   
+
+    for (let i = 0; i <  allMaterials.allProjects[index].projectList.length; i++) {
+      
+      movingTasks.taskcards(allMaterials.allProjects[index].projectList[i])
+      
+    }
+
+
+
+
+
+  }
+
+
+
+return {createTaskBoxforProject,navigatingTheProjectAndGivingTasks}
+})()
+function TaskBoxcleanup() {
+  let TaskBox=document.querySelectorAll('#TaskBox')
+  TaskBox.forEach(TaskBox=>{
+    TaskBox.remove();
+
+  })
+}
+// movingTasks.makeTaskbox();
+function settingAlltasksinHome() {
+
+console.log("hello");
+
+for (let i = 0; i < allMaterials.allTasks.length; i++) {
+  console.log(allMaterials.allTasks[i]);
+ movingTasks.taskcards(allMaterials.allTasks[i])
+  
+}
+
+
+  
+}
+
+settingAlltasksinHome();
