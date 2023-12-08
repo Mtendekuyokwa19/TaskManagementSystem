@@ -19,6 +19,7 @@ import { spaceTravels } from './add.js'
 import { TaskManagement } from './add.js'
 import briefcaseProjects from './icons/briefcase-outline.svg'
 import messageIcon from './icons/message-outline.svg'
+import { shiftProject } from './project.js'
 
 
 class createElementtoDom{
@@ -134,7 +135,12 @@ export let createTaskicon=(()=>{
 return {addTask}
 })()
 
+let knowWhichsectiondialogis={
 
+  section:"Home"
+
+
+}
 
 let inputBoxcreateProjects=(()=>{
   let dialogBox=domElementMaker.domElementCreator('dialog',"dialogCreateProject",sidebar.siderbox);
@@ -335,11 +341,26 @@ createTaskDialog.dialogTask.close();
 
 
 }
+export function notHomesection(){
 
+  knowWhichsectiondialogis.section="notHome"
+
+}
+function knowsection(){
+
+  if(knowWhichsectiondialogis.section==="Home"){
+    console.log("we ar in",knowWhichsectiondialogis.section)
+    settingAlltasksinHome()
+
+  }
+
+}
 function enterTask() {
   addTask();
   movingTasks.placingTasks();
   movingTasks.updateAlltasks()
+  knowsection();
+  
   
 }
 
@@ -613,7 +634,9 @@ function homeButtonReset() {
     movingTasks.makeTaskbox();
     // movingTasks.placingTasks();
     // movingTasks.updateAlltasks();
-    settingAlltasksinHome()
+    knowWhichsectiondialogis.section="Home";
+    knowsection();
+    // settingAlltasksinHome()
 }
 
 Homebutton.addEventListener('click',function(e){
@@ -654,7 +677,7 @@ export let projectButtonActionsTogiveTasks=(()=>{
 return {createTaskBoxforProject,navigatingTheProjectAndGivingTasks}
 })()
 function TaskBoxcleanup() {
-  let TaskBox=document.querySelectorAll('#TaskBox')
+  let TaskBox=document.querySelectorAll('.task')
   TaskBox.forEach(TaskBox=>{
     TaskBox.remove();
 
@@ -662,7 +685,7 @@ function TaskBoxcleanup() {
 }
 // movingTasks.makeTaskbox();
 function settingAlltasksinHome() {
-
+TaskBoxcleanup();
 console.log("hello");
 
 for (let i = 0; i < allMaterials.allTasks.length; i++) {

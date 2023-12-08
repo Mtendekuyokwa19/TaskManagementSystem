@@ -6,8 +6,9 @@ import { stylingSlelectedButtons } from "./Dom.js";
 import { movingfromOneprojecttoanother } from "./Dom.js";
 import { projectButtonActionsTogiveTasks } from "./Dom.js";
 import { TaskManagement } from "./add";
+import { notHomesection } from "./Dom.js";
 
-function shiftProject(position){
+export function shiftProject(position){
       console.log(position);  
       TaskManagement.projectPos.position=position;
 }
@@ -17,7 +18,7 @@ export class Taskineachproject{
 
     constructor(projectButton,index){
         this.projectButton=projectButton.addEventListener('click',function(e){
-
+            notHomesection();
            shiftProject(index)
            stylingSlelectedButtons.returnAllbuttonstlyesTodefault();
            stylingSlelectedButtons.makingTheButtonGlow(projectButton);
