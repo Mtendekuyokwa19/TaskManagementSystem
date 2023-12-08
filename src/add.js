@@ -109,16 +109,28 @@ export let TaskManagement=(()=>{
    function addTasktoProject(task,project=allMaterials.allProjects[projectPos.position].projectList){
 
         project[project.length]=task;
-        allMaterials.allTasks[allMaterials.allTasks.length]=task;
+        // allMaterials.allTasks[allMaterials.allTasks.length]=task;
         
         
         
         
         }
+function addingToallTasks() {
+allMaterials.allTasks.splice(0,allMaterials.allTasks.length)
 
 
+    for (let index = 0; index < allMaterials.allProjects.length; index++) {
+        
+        for (let x = 0; x < allMaterials.allProjects[index].projectList.length; x++) {
+            // console.log(allMaterials.allProjects[index].projectList,allMaterials.allProjects.length)
+            allMaterials.allTasks[allMaterials.allTasks.length]=allMaterials.allProjects[index].projectList[x];
+        }
+    }
+    
+}
 
-return {createTask,findingTask,addTasktoProject,projectPos}
+
+return {createTask,findingTask,addTasktoProject,projectPos,addingToallTasks}
 
 
 })()

@@ -145,6 +145,7 @@ let knowWhichsectiondialogis={
 let inputBoxcreateProjects=(()=>{
   let dialogBox=domElementMaker.domElementCreator('dialog',"dialogCreateProject",sidebar.siderbox);
   let messageBoxdiv=domElementMaker.domElementCreator('form',"messageBoxdiv",dialogBox)
+  messageBoxdiv.setAttribute("method","dialog");
   let ProjectNamelabel=domElementMaker.domElementCreator('label',"projectName",messageBoxdiv)
   ProjectNamelabel.setAttribute("for","projectNameinput");
   let projectNameinput=domElementMaker.domElementCreator('input',"projectNameinput",messageBoxdiv)
@@ -335,6 +336,7 @@ function addTask(){
   }
 let newTask=new TaskManagement.createTask(createTaskDialog.TaskName.value,createTaskDialog.TaskDescription.value,createTaskDialog.date.value,createTaskDialog.PriorityDropdown.value)
 TaskManagement.addTasktoProject(newTask);
+TaskManagement.addingToallTasks();
 
 console.log(allMaterials.allTasks);
 createTaskDialog.dialogTask.close();
@@ -401,7 +403,7 @@ function createButtonsFromAllProjects(){
 
 for (let i = 0; i < arrayOfprojects.length; i++) {
  let button=domElementMaker.domElementCreator('button',"project",sidebar.divProjectsSection,"> "+arrayOfprojects[i].projectTitle)
- if(i===0){
+ if(i===TaskManagement.projectPos.position){
     stylingSlelectedButtons.makingTheButtonGlow(button)
  } 
  button.className="projectName" ;
@@ -481,9 +483,10 @@ return{makeStatistics}
 })()
 
 function UpdateNumberOfProjects() {
+  if(knowWhichsectiondialogis.section==="Home"){
   let ProjectNumber=document.querySelector('#projectNumber')
   ProjectNumber.textContent=allMaterials.allProjects.length;
-  
+  }
 }
 let movingTasks=(()=>{
   function makeTaskbox() {
@@ -544,8 +547,12 @@ let movingTasks=(()=>{
   
   }
   function updateAlltasks() {
-    let numberOftasks=document.querySelector('#TaskNumber')
-    // numberOftasks.textContent=allMaterials.allTasks.length;
+    if(knowWhichsectiondialogis.section==="Home"){
+      let numberOftasks=document.querySelector('#TaskNumber')
+      numberOftasks.textContent=allMaterials.allTasks.length;
+
+    }
+   
   }
 
 
@@ -632,6 +639,7 @@ function homeButtonReset() {
   movingfromOneprojecttoanother.refreshTaskBox();
     statistics.makeStatistics();
     movingTasks.makeTaskbox();
+    UpdateNumberOfProjects()
     // movingTasks.placingTasks();
     // movingTasks.updateAlltasks();
     knowWhichsectiondialogis.section="Home";

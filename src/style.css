@@ -375,7 +375,7 @@ padding: 0px 10px;
     grid-row: 2/-1;
     display: flex;
     flex-direction: column;
-    gap:12px;
+   
 
 
 
@@ -463,7 +463,7 @@ top:15px
  }
 
 #TaskBox{
- 
+  margin-top:12px;
   display: grid;
   grid-template-columns: repeat(2,1fr);
   grid-template-rows: repeat(3,110px);
