@@ -522,7 +522,7 @@ justify-content: flex-end;
 
   width: 71px;
   height: 27px;
-
+  text-decoration: none;
 
 }
 
@@ -532,6 +532,7 @@ justify-content: flex-end;
   color: #F39C12;
   border: solid 2px #F39C12;
   border-radius: 34px;
+  text-decoration: none;
 
 
 }
@@ -541,6 +542,7 @@ justify-content: flex-end;
   color: white;
   border: none;
   outline: none;
+  text-decoration: none;
 
 
 
@@ -550,5 +552,26 @@ background-color: rgb(102, 33, 33);
 color: white;
 border: none;
 outline: none;
+
+}
+
+input[type="checkbox"]{
+
+  width: 28px;
+  height: 28px;
+
+  /* background:  */
+  appearance: none;
+  background-color: none;
+  border: 2px #ced4da solid;
+  border-radius: 8px;
+ 
+}
+input[type="checkbox"]:checked{
+
+  background-color: #27AE60;
+  border: none;
+  
+
 
 }
