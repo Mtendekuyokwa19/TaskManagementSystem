@@ -4,6 +4,7 @@ export let allMaterials=(()=>{
 
     let allProjects=[];
     let allTasks=[];
+  
 
 
 return {allProjects,allTasks}
@@ -81,7 +82,7 @@ export let TaskManagement=(()=>{
 
    
 
-    function findingTask(TaskName){
+    function findingTask({title,description}){
 
    
         for (let i = 0; i < allMaterials.allProjects.length; i++) {
@@ -90,7 +91,7 @@ export let TaskManagement=(()=>{
             for (let x = 0; x < allMaterials.allProjects[i]["projectList"].length; x++) {
     
             
-              if(TaskName===allMaterials.allProjects[i]["projectList"][x]["title"]){
+              if(title===allMaterials.allProjects[i]["projectList"][x]["title"]&&description===allMaterials.allProjects[i]["projectList"][x]["description"]){
     
                 console.log("found",x,i,allMaterials.allProjects[i]["projectList"][x]["title"]);
     
@@ -152,19 +153,30 @@ function placeTaskinAllTasks() {
     
 }
 
-let unknownTaks= new ProjectManagement.createProject("unknown");
-ProjectManagement.addToAllProjects(unknownTaks);
-let task= new TaskManagement.createTask("Make chips","fly emirates","2020-3-20","medium");
-TaskManagement.addTasktoProject(task);
+export let amountofCompletedTasks=(()=>{
+
+    function countCompletedTasks() {
+        let counter=0;
+        
+         allMaterials.allTasks.forEach(task=>{
+
+            if(task.status=="done"){
+                counter++
+               
+            }
+         }) 
+           
+      console.log("here",allMaterials.allTasks)      
+        
+     return counter;   
+    }
 
 
-
-
-
+return {countCompletedTasks};
+})()
 
 
 
 //creating default 
 export let spaceTravels=new ProjectManagement.createProject("space trip");
 ProjectManagement.addToAllProjects(spaceTravels);
-TaskManagement.findingTask("Make chips");

@@ -21,6 +21,7 @@ import briefcaseProjects from './icons/briefcase-outline.svg'
 import messageIcon from './icons/message-outline.svg'
 import { shiftProject } from './project.js'
 import { completeButtonforEachProject } from './check.js'
+import { amountofCompletedTasks } from './add.js'
 
 class createElementtoDom{
 
@@ -661,6 +662,7 @@ function homeButtonReset() {
     knowWhichsectiondialogis.section="Home";
     knowsection();
     completeTask.manageCheckbox();
+    updatingCompletedTask()
     // settingAlltasksinHome()
 }
 
@@ -767,3 +769,12 @@ return {strikeoutWords}
 function keepingStrikeOut({status},) {
   
 }
+
+export function updatingCompletedTask() {
+  let updateTask=document.querySelector('#completedNumber');
+  let numbers=amountofCompletedTasks.countCompletedTasks()
+  updateTask.textContent=numbers;
+  console.log(amountofCompletedTasks.countCompletedTasks());
+}
+
+updatingCompletedTask();
