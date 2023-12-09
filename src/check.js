@@ -32,7 +32,7 @@ export class completeButtonforEachProject{
         else{
             strikeOuteffect.strikeoutWords(index,"none")
             allMaterials.allProjects[TaskManagement.projectPos.position].projectList[index].status="undone"
-            updatingCompletedTask();
+            // updatingCompletedTask();
 
         }
            
