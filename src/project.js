@@ -22,7 +22,7 @@ export class Taskineachproject{
         this.projectButton=projectButton.addEventListener('click',function(e){
             notHomesection();
            shiftProject(index)
-           
+           strikeOuteffect.strikeoutWords();
            stylingSlelectedButtons.returnAllbuttonstlyesTodefault();
            stylingSlelectedButtons.makingTheButtonGlow(projectButton);
            movingfromOneprojecttoanother.refreshTaskBox();
