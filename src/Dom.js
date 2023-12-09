@@ -512,7 +512,12 @@ let movingTasks=(()=>{
     let edit=contentBoxelementMaker('button',"editTask",buttonsManipulationDiv,"edit");
     let complete=contentBoxelementMaker('input',"completeTask",buttonsManipulationDiv,status);
     //re-factor this make a fn
-   
+    if (status==="done"){
+
+     complete.checked=true;
+     taskTitle.style.setProperty("text-decoration","line-through")
+     DescriptionTask.style.setProperty("text-decoration","line-through")
+    }
 
   
     complete.type="checkbox";
@@ -539,6 +544,7 @@ let movingTasks=(()=>{
     for (let i = 0; i < allMaterials.allProjects[TaskManagement.projectPos.position].projectList.length; i++) {
       let task=allMaterials.allProjects[TaskManagement.projectPos.position].projectList[i];
       console.log(task)
+
       
      taskcards(task);
      
@@ -757,3 +763,7 @@ export let strikeOuteffect=(()=>{
 return {strikeoutWords}
 })()
 
+
+function keepingStrikeOut({status},) {
+  
+}
