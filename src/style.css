@@ -158,6 +158,7 @@ height: 100px;
 grid-column-start: 2;
 grid-column-end: 6;
 background-color: #3754DB;
+
 display: flex;
 gap:10px;
 height:100px ;
@@ -466,9 +467,9 @@ top:15px
   margin-top:12px;
   display: grid;
   grid-template-columns: repeat(2,1fr);
-  grid-template-rows: repeat(3,110px);
+  grid-template-rows: repeat(3,120px);
   grid-auto-columns: 1fr;
-  grid-auto-rows:110px;
+  grid-auto-rows:120px;
   flex-grow: 1;
   padding: 0px 37px;
   gap: 12px;
@@ -575,3 +576,19 @@ input[type="checkbox"]:checked{
 
 
 }
+#dateDiv{
+
+  display: flex;
+  gap: 389px;
+  font-weight: bold;
+
+}
+
+#dateDiv button{
+
+  background-color: transparent;
+  
+  border: none;
+
+}
+

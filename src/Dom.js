@@ -22,6 +22,7 @@ import messageIcon from './icons/message-outline.svg'
 import { shiftProject } from './project.js'
 import { completeButtonforEachProject } from './check.js'
 import { amountofCompletedTasks } from './add.js'
+import deleteicon from './icons/deleteIcons.svg'
 
 class createElementtoDom{
 
@@ -456,7 +457,7 @@ let statistics=(()=>{
 
   function makeStatistics() {
     let statisticsHolderbox=contentBoxelementMaker('div',"statisticsHolderbox",contentTobeupdatedChangingProjects.content)
-    let cardNames=["Current Projects","Current Tasks","Completed Tasks"];
+    let cardNames=["Current Projects","Overall Tasks","Completed Tasks"];
     let namesOfStats=["informationOfProjectsHolder","infomationOfTasksHolder","informationOfcompletedTasksHolder"]
     let cardDetails=["projectNumber","TaskNumber","completedNumber"]
     let icons=[briefcaseProjects,messageIcon,allTasksicon]
@@ -504,8 +505,11 @@ let movingTasks=(()=>{
     let taskDiv=contentBoxelementMaker('div',"TaskDiv",TaskBox)
     
     let dateDiv=contentBoxelementMaker('div',"dateDiv",taskDiv)
-  
+
+    
     let Date=contentBoxelementMaker('p',"daysRemaining",dateDiv,date);
+    let deletebutton=domElementMaker.domElementCreator('button',"deleteTask",dateDiv)
+    let deleteIcon=domElementMaker.ImageLoadtoDOm(deleteicon,deletebutton,"deleteIcon");
     let taskTitle=contentBoxelementMaker('p',"taskTitle",taskDiv,title);
     let DescriptionTask=contentBoxelementMaker('p',"explainationTask",taskDiv,description)
     let buttonsManipulationDiv=contentBoxelementMaker('div',"buttonsManipulationDiv",taskDiv)
