@@ -20,7 +20,7 @@ import { TaskManagement } from './add.js'
 import briefcaseProjects from './icons/briefcase-outline.svg'
 import messageIcon from './icons/message-outline.svg'
 import { shiftProject } from './project.js'
-
+import { completeButtonforEachProject } from './check.js'
 
 class createElementtoDom{
 
@@ -135,7 +135,7 @@ export let createTaskicon=(()=>{
 return {addTask}
 })()
 
-let knowWhichsectiondialogis={
+export let knowWhichsectiondialogis={
 
   section:"Home"
 
@@ -275,6 +275,7 @@ let createTaskDialog=(()=>{
   DescriptionLabel.setAttribute("for","TaskDescription")
   let TaskDescription=domElementMaker.domElementCreator('textarea',"TaskDescription",RequirementsForm,null,"Take the mars rover at ubuntu station ")
   TaskDescription.rows=4;
+  TaskDescription.setAttribute("maxlength",45);
 
   let dateLabel=domElementMaker.domElementCreator('label','DateLabel',RequirementsForm,"Due Date");
   dateLabel.setAttribute("for","Date")
@@ -343,6 +344,7 @@ createTaskDialog.dialogTask.close();
 
 
 }
+//move this to add.js
 export function notHomesection(){
 
   knowWhichsectiondialogis.section="notHome"
@@ -362,6 +364,7 @@ function enterTask() {
   movingTasks.placingTasks();
   movingTasks.updateAlltasks()
   knowsection();
+  completeTask.manageCheckbox();
   
   
 }
@@ -494,7 +497,7 @@ let movingTasks=(()=>{
   let TaskBox=contentBoxelementMaker('div',"TaskBox",contentTobeupdatedChangingProjects.content)
   return TaskBox
   }
- 
+   
   let taskcards=(({title,description,date,priority,status},TaskBox=document.querySelector('#TaskBox'))=>{
 
     let taskDiv=contentBoxelementMaker('div',"TaskDiv",TaskBox)
@@ -507,7 +510,13 @@ let movingTasks=(()=>{
     let buttonsManipulationDiv=contentBoxelementMaker('div',"buttonsManipulationDiv",taskDiv)
     let PriorityTag=contentBoxelementMaker('button',"Priotrity",buttonsManipulationDiv,priority)
     let edit=contentBoxelementMaker('button',"editTask",buttonsManipulationDiv,"edit");
-    let complete=contentBoxelementMaker('button',"completeTask",buttonsManipulationDiv,status);
+    let complete=contentBoxelementMaker('input',"completeTask",buttonsManipulationDiv,status);
+    //re-factor this make a fn
+   
+
+  
+    complete.type="checkbox";
+    complete.title="toogle complete"
     taskDiv.className="task";
     dateDiv.className="task";
     Date.className="task";
@@ -640,10 +649,12 @@ function homeButtonReset() {
     statistics.makeStatistics();
     movingTasks.makeTaskbox();
     UpdateNumberOfProjects()
+
     // movingTasks.placingTasks();
     // movingTasks.updateAlltasks();
     knowWhichsectiondialogis.section="Home";
     knowsection();
+    completeTask.manageCheckbox();
     // settingAlltasksinHome()
 }
 
@@ -707,3 +718,42 @@ for (let i = 0; i < allMaterials.allTasks.length; i++) {
 }
 
 settingAlltasksinHome();
+
+export let completeTask=(()=>{
+
+  function manageCheckbox() {
+    let index=0;
+let checkboxOfcomplete=document.querySelectorAll('#completeTask');
+
+checkboxOfcomplete.forEach(checkbox=>{
+
+  let complete=new completeButtonforEachProject(checkbox,index)
+  index++;
+})
+    
+  }
+
+
+
+
+
+return {manageCheckbox}
+
+})()
+
+export let strikeOuteffect=(()=>{
+
+  function strikeoutWords(position,chosenStyle="line-through") {
+    let allTasktitles=document.querySelectorAll('#taskTitle')
+    let explainationTask=document.querySelectorAll('#explainationTask')
+
+    allTasktitles[position].style.setProperty("text-decoration",chosenStyle);
+    explainationTask[position].style.setProperty("text-decoration",chosenStyle);
+  }
+  
+
+
+
+return {strikeoutWords}
+})()
+

@@ -7,6 +7,8 @@ import { movingfromOneprojecttoanother } from "./Dom.js";
 import { projectButtonActionsTogiveTasks } from "./Dom.js";
 import { TaskManagement } from "./add";
 import { notHomesection } from "./Dom.js";
+import { completeTask } from "./Dom.js";
+import { strikeOuteffect } from "./Dom.js";
 
 export function shiftProject(position){
       console.log(position);  
@@ -20,11 +22,13 @@ export class Taskineachproject{
         this.projectButton=projectButton.addEventListener('click',function(e){
             notHomesection();
            shiftProject(index)
+           
            stylingSlelectedButtons.returnAllbuttonstlyesTodefault();
            stylingSlelectedButtons.makingTheButtonGlow(projectButton);
            movingfromOneprojecttoanother.refreshTaskBox();
            projectButtonActionsTogiveTasks.createTaskBoxforProject();
            projectButtonActionsTogiveTasks.navigatingTheProjectAndGivingTasks(index);
+           completeTask.manageCheckbox();
             
             })
          

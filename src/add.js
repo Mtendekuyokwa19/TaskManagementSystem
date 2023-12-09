@@ -63,7 +63,7 @@ export let TaskManagement=(()=>{
     class createTask{
 
 
-        constructor(title,description,date,priority,status="pending"){
+        constructor(title,description,date,priority,status="undone"){
     
             this.title=title;
             this.description=description;
@@ -84,17 +84,17 @@ export let TaskManagement=(()=>{
     function findingTask(TaskName){
 
    
-        for (let i = 0; i < allProjects.length; i++) {
+        for (let i = 0; i < allMaterials.allProjects.length; i++) {
     
            
-            for (let x = 0; x < allProjects[i]["projectList"].length; x++) {
+            for (let x = 0; x < allMaterials.allProjects[i]["projectList"].length; x++) {
     
             
-              if(TaskName===allProjects[i]["projectList"][x]["title"]){
+              if(TaskName===allMaterials.allProjects[i]["projectList"][x]["title"]){
     
-                console.log("found",x,i,allProjects[i]["projectList"][x]["title"]);
+                console.log("found",x,i,allMaterials.allProjects[i]["projectList"][x]["title"]);
     
-                return{x,i}
+                return {i,x};
               }
                 
             }
@@ -152,7 +152,10 @@ function placeTaskinAllTasks() {
     
 }
 
-
+let unknownTaks= new ProjectManagement.createProject("unknown");
+ProjectManagement.addToAllProjects(unknownTaks);
+let task= new TaskManagement.createTask("Make chips","fly emirates","2020-3-20","medium");
+TaskManagement.addTasktoProject(task);
 
 
 
@@ -164,4 +167,4 @@ function placeTaskinAllTasks() {
 //creating default 
 export let spaceTravels=new ProjectManagement.createProject("space trip");
 ProjectManagement.addToAllProjects(spaceTravels);
-
+TaskManagement.findingTask("Make chips");
