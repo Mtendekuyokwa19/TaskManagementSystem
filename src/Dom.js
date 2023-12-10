@@ -696,7 +696,7 @@ export let projectButtonActionsTogiveTasks=(()=>{
     TaskBoxforProject.className=".contentToRemove";
     
     
-    return TaskBoxforProjectknowWhichsectiondialogis.section="Today"
+    // return TaskBoxforProjectknowWhichsectiondialogis.section="Today"
     }
 
   function navigatingTheProjectAndGivingTasks(index){
