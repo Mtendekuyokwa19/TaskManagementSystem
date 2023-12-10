@@ -376,7 +376,7 @@ padding: 0px 10px;
     grid-row: 2/-1;
     display: flex;
     flex-direction: column;
-   
+    overflow: auto;
 
 
 
@@ -565,7 +565,7 @@ input[type="checkbox"]{
   /* background:  */
   appearance: none;
   background-color: none;
-  border: 2px #ced4da solid;
+  /* border: 2px #ced4da solid; */
   border-radius: 8px;
  
 }
@@ -590,6 +590,58 @@ input[type="checkbox"]:checked{
   background-color: transparent;
   
   border: none;
+
+}
+#holderforDates{
+
+  
+  flex-grow: 1;
+  /* border: 2px solid red; */
+  display: flex;
+  flex-direction: column;
+
+
+}
+
+#holderforDates>div{
+
+  flex-grow: 1;
+
+  /* border: solid blue 2px; */
+  overflow: auto;
+
+
+}
+#TodayBox,#tomorrowBox{
+
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+
+
+}
+#TodayBox>div,#tomorrowBox>div{
+
+  /* border: 2px solid yellow; */
+flex-grow: 1;
+
+}
+
+#TodayBox>p,#tomorrowBox>p{
+font-weight: bold;
+  
+}
+#taskBoxToday,#taskBoxtomorrow{
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  grid-template-rows: repeat(2,120px);
+  grid-auto-columns: 1fr;
+  grid-auto-rows:120px;
+padding: 13px;
+gap: 12px;
+padding: 0px 37px;
+margin-top: 16px;
+
 
 }
 

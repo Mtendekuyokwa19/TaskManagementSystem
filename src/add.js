@@ -1,5 +1,5 @@
 import { movingTasks } from "./Dom.js";
-
+import add from "date-fns/add";
 export let allMaterials=(()=>{
 
     let allProjects=[];
@@ -191,9 +191,37 @@ export let arrangeDates=(()=>{
         
     }
 
+    function TomorrowDates() {
+        for (let i = 0; i < allMaterials.allTasks.length; i++) {
+            let dateOftask=new Date( allMaterials.allTasks[i].date).toISOString().slice(0, 10);
+            let Tomorrow = add(new Date(),{days:1}).toISOString().slice(0, 10)
+
+           
+            if(dateOftask===Tomorrow){
+                movingTasks.taskcards(allMaterials.allTasks[i],document.querySelector('#taskBoxToday'))
+            }
+            
+        }
+        
+    }
+
+    function aDayafter() {
+        for (let i = 0; i < allMaterials.allTasks.length; i++) {
+            let dateOftask=new Date( allMaterials.allTasks[i].date).toISOString().slice(0, 10);
+            let aDayafter = add(new Date(),{days:2}).toISOString().slice(0, 10)
+
+           
+            if(dateOftask===aDayafter){
+                movingTasks.taskcards(allMaterials.allTasks[i],document.querySelector('#taskBoxtomorrow'))
+            }
+            
+        }
+        
+        
+    }
 
 
-return {todayDates}
+return {todayDates,TomorrowDates,aDayafter}
 
 })()
 

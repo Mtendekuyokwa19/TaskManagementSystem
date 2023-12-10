@@ -12,7 +12,7 @@ import topBoxImage from './images/girl.svg'
 import musicimage from './images/music.svg'
 import addTaskImage from './icons/createAdd.svg'
 import boypapers from './images/carryingpapers.svg'
-import {format} from 'date-fns';
+import {add, format} from 'date-fns';
 import { ProjectManagement } from './add.js'
 import { allMaterials } from './add.js'
 import { spaceTravels } from './add.js'
@@ -815,4 +815,37 @@ let todayButtonFunctionalities=(()=>{
 
 
 return {todayTask}
+})()
+
+
+let orderTasks=(()=>{
+
+  let calender=document.querySelector('#calender');
+  function arrangeTask() {
+    movingfromOneprojecttoanother.refreshTaskBox();
+    
+  }
+  function makeTheboxesForEachday() {
+    let HolderforDates=contentBoxelementMaker('div',"holderforDates",document.querySelector('#contentTobeUpdated'))
+    let TodayBox=contentBoxelementMaker('div',"TodayBox",HolderforDates)
+    let Todayheading=contentBoxelementMaker('p',"heading",TodayBox,"Tomorrow")
+    let taskboxToday=contentBoxelementMaker('div',"taskBoxToday",TodayBox)
+    let tomorrowBox=contentBoxelementMaker ('div',"tomorrowBox",HolderforDates);
+   
+    let tomorrowHeading=contentBoxelementMaker('p',"tomorrowHeading",tomorrowBox,add(new Date(),{days:2}).toLocaleString('en-us',{day:'numeric',month:'long'}))
+    let taskTomorrowbox=contentBoxelementMaker('div',"taskBoxtomorrow",tomorrowBox)
+    
+  }
+
+calender.addEventListener('click',function (e) {
+
+  arrangeTask();
+  makeTheboxesForEachday()
+  arrangeDates.TomorrowDates();
+  arrangeDates.aDayafter()
+})
+
+
+
+
 })()

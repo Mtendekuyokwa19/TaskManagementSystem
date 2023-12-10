@@ -18,7 +18,7 @@ export class completeButtonforEachProject{
             let projectBox=TaskManagement.findingTask(allMaterials.allTasks[index])
             // updatin
             allMaterials.allProjects[projectBox.i].projectList[projectBox.x].status="done";
-            console.log(allMaterials.allProjects[projectBox.i].projectList[projectBox.x])
+            // console.log(allMaterials.allProjects[projectBox.i].projectList[projectBox.x])
             strikeOuteffect.strikeoutWords(index);
             updatingCompletedTask()
         }
@@ -32,7 +32,14 @@ export class completeButtonforEachProject{
         else{
             strikeOuteffect.strikeoutWords(index,"none")
             allMaterials.allProjects[TaskManagement.projectPos.position].projectList[index].status="undone"
-            // updatingCompletedTask();
+            if(knowWhichsectiondialogis.section==="Home"){
+
+                updatingCompletedTask();
+
+            }
+            
+           
+            
 
         }
            
