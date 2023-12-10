@@ -491,6 +491,7 @@ top:15px
   font-size: 12px;
   color: #666666;
   letter-spacing: 1px;
+  width: 73px;
 
 
 }
@@ -579,7 +580,7 @@ input[type="checkbox"]:checked{
 #dateDiv{
 
   display: flex;
-  gap: 389px;
+  gap: 387px;
   font-weight: bold;
 
 }
