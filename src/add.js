@@ -1,4 +1,4 @@
-
+import { movingTasks } from "./Dom.js";
 
 export let allMaterials=(()=>{
 
@@ -175,6 +175,27 @@ export let amountofCompletedTasks=(()=>{
 return {countCompletedTasks};
 })()
 
+export let arrangeDates=(()=>{
+
+    function todayDates() {
+        for (let i = 0; i < allMaterials.allTasks.length; i++) {
+            let dateOftask=new Date( allMaterials.allTasks[i].date).toISOString().slice(0, 10);
+            let today = new Date().toISOString().slice(0, 10)
+
+           
+            if(dateOftask===today){
+                movingTasks.taskcards(allMaterials.allTasks[i])
+            }
+            
+        }
+        
+    }
+
+
+
+return {todayDates}
+
+})()
 
 
 //creating default 

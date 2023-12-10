@@ -23,6 +23,9 @@ import { shiftProject } from './project.js'
 import { completeButtonforEachProject } from './check.js'
 import { amountofCompletedTasks } from './add.js'
 import deleteicon from './icons/deleteIcons.svg'
+import todayIcon from './icons/today.svg'
+import { arrangeDates } from './add.js'
+
 
 class createElementtoDom{
 
@@ -74,6 +77,10 @@ let homeButton=domElementMaker.domElementCreator('button',"homeDiv",section);
 let homeicon=domElementMaker.ImageLoadtoDOm(HomeIcon,homeButton,"homeicon")
 let homeText=domElementMaker.domElementCreator('p',"hometext",homeButton,"Home");
 
+let Today=domElementMaker.domElementCreator('button',"todayButton",section)
+let TodayIcon=domElementMaker.ImageLoadtoDOm(todayIcon,Today,"todayIcon");
+let TodayText=domElementMaker.domElementCreator('p',"TodayText",Today,"Today");
+
 
 let DatesArrangedButton=domElementMaker.domElementCreator('button',"calender",section);
 let Datesicon=domElementMaker.ImageLoadtoDOm(dateIcon,DatesArrangedButton,"Datesicon")
@@ -105,7 +112,7 @@ createprojectsButton.title="Create Project"
 
 
 
-return {createprojectsButton,siderbox,divProjectsSection};
+return {createprojectsButton,siderbox,divProjectsSection,Today};
 
 })();
 
@@ -359,6 +366,10 @@ function knowsection(){
     settingAlltasksinHome()
 
   }
+  else if(knowWhichsectiondialogis.section==="Today"){
+      todayButtonFunctionalities.todayTask();
+
+  }
 
 }
 function enterTask() {
@@ -493,14 +504,14 @@ function UpdateNumberOfProjects() {
   ProjectNumber.textContent=allMaterials.allProjects.length;
   }
 }
-let movingTasks=(()=>{
+export let movingTasks=(()=>{
   function makeTaskbox() {
     
   let TaskBox=contentBoxelementMaker('div',"TaskBox",contentTobeupdatedChangingProjects.content)
   return TaskBox
   }
    
-  let taskcards=(({title,description,date,priority,status},TaskBox=document.querySelector('#TaskBox'))=>{
+let taskcards=(({title,description,date,priority,status},TaskBox=document.querySelector('#TaskBox'))=>{
 
     let taskDiv=contentBoxelementMaker('div',"TaskDiv",TaskBox)
     
@@ -685,7 +696,7 @@ export let projectButtonActionsTogiveTasks=(()=>{
     TaskBoxforProject.className=".contentToRemove";
     
     
-    return TaskBoxforProject
+    return TaskBoxforProjectknowWhichsectiondialogis.section="Today"
     }
 
   function navigatingTheProjectAndGivingTasks(index){
@@ -782,3 +793,26 @@ export function updatingCompletedTask() {
 }
 
 updatingCompletedTask();
+
+let todayButtonFunctionalities=(()=>{
+
+    let todayButton=sidebar.Today;
+
+    function todayTask() {
+      movingfromOneprojecttoanother.refreshTaskBox();
+      movingTasks.makeTaskbox();
+      
+      arrangeDates.todayDates()
+      
+      
+    }
+    todayButton.addEventListener('click',function(e){
+      
+      knowWhichsectiondialogis.section="Today"
+      todayTask()
+    })
+
+
+
+return {todayTask}
+})()
