@@ -45,7 +45,7 @@ export let ProjectManagement=(()=>{
      
       
              
-             return allProjects[i].projectList;
+             return i;
         }
     
         return
@@ -64,14 +64,14 @@ export let TaskManagement=(()=>{
     class createTask{
 
 
-        constructor(title,description,date,priority,status="undone"){
+        constructor(title,description,date,priority,status="undone",projectBelong=""){
     
             this.title=title;
             this.description=description;
             this.date=date;
             this.priority=priority;
             this.status=status;
-    
+            this.Project=projectBelong
     
     
     

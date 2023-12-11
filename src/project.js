@@ -11,7 +11,7 @@ import { completeTask } from "./Dom.js";
 import { strikeOuteffect } from "./Dom.js";
 
 export function shiftProject(position){
-      console.log(position);  
+    //   console.log(position);  
       TaskManagement.projectPos.position=position;
 }
 
