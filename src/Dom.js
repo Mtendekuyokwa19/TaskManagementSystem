@@ -26,6 +26,7 @@ import deleteicon from './icons/deleteIcons.svg'
 import todayIcon from './icons/today.svg'
 import { arrangeDates } from './add.js'
 
+import { deleteTasks } from './delete.js'
 
 class createElementtoDom{
 
@@ -345,10 +346,12 @@ function addTask(){
     return 
   }
 let newTask=new TaskManagement.createTask(createTaskDialog.TaskName.value,createTaskDialog.TaskDescription.value,createTaskDialog.date.value,createTaskDialog.PriorityDropdown.value)
+newTask.Project=allMaterials.allProjects[TaskManagement.projectPos.position].projectTitle;
 TaskManagement.addTasktoProject(newTask);
+deleteTasks.clearOverdue()
 TaskManagement.addingToallTasks();
 
-console.log(allMaterials.allTasks);
+
 createTaskDialog.dialogTask.close();
 
 
@@ -362,7 +365,7 @@ export function notHomesection(){
 function knowsection(){
 
   if(knowWhichsectiondialogis.section==="Home"){
-    console.log("we ar in",knowWhichsectiondialogis.section)
+    // console.log("we ar in",knowWhichsectiondialogis.section)
     settingAlltasksinHome()
 
   }
@@ -374,10 +377,16 @@ function knowsection(){
 }
 function enterTask() {
   addTask();
+  
   movingTasks.placingTasks();
+  
   movingTasks.updateAlltasks()
+  
   knowsection();
   completeTask.manageCheckbox();
+  deleteingTasksofproject.buttonManager();
+
+ 
   
   
 }
@@ -404,7 +413,7 @@ function refresh() {
   let projects=document.querySelectorAll('.projectName');
 
   projects.forEach(projects=>{
-    console.log(projects);
+    // console.log(projects);
     projects.remove()
 
   })
@@ -559,10 +568,11 @@ let taskcards=(({title,description,date,priority,status},TaskBox=document.queryS
   
     for (let i = 0; i < allMaterials.allProjects[TaskManagement.projectPos.position].projectList.length; i++) {
       let task=allMaterials.allProjects[TaskManagement.projectPos.position].projectList[i];
-      console.log(task)
+      // console.log(task)
 
       
      taskcards(task);
+     
      
     }
     
@@ -731,7 +741,7 @@ TaskBoxcleanup();
 console.log("hello");
 
 for (let i = 0; i < allMaterials.allTasks.length; i++) {
-  console.log(allMaterials.allTasks[i]);
+  // console.log(allMaterials.allTasks[i]);
  movingTasks.taskcards(allMaterials.allTasks[i])
   
 }
@@ -789,7 +799,7 @@ export function updatingCompletedTask() {
   let updateTask=document.querySelector('#completedNumber');
   let numbers=amountofCompletedTasks.countCompletedTasks()
   updateTask.textContent=numbers;
-  console.log(amountofCompletedTasks.countCompletedTasks());
+  // console.log(amountofCompletedTasks.countCompletedTasks());
 }
 
 updatingCompletedTask();
@@ -848,4 +858,30 @@ calender.addEventListener('click',function (e) {
 
 
 
+})()
+// deleteingTasks.clearOverdue()
+
+export let deleteingTasksofproject=(()=>{
+
+
+  function buttonManager() {
+    let allDeletingButton=document.querySelectorAll('#deleteTask');
+    let index=0;
+    allDeletingButton.forEach(button=>{
+
+      let buttonManager=new deleteTasks.deleteTask(button,index);
+      index++;
+
+      console.log("we here");
+    })
+
+                
+
+    
+  }
+
+
+buttonManager();
+
+return {buttonManager}
 })()
