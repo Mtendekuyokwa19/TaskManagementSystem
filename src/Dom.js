@@ -384,7 +384,7 @@ function enterTask() {
   
   knowsection();
   completeTask.manageCheckbox();
-  deleteingTasksofproject.buttonManager();
+
 
  
   
@@ -572,10 +572,11 @@ let taskcards=(({title,description,date,priority,status},TaskBox=document.queryS
 
       
      taskcards(task);
+    
      
      
     }
-    
+     deleteingTasksofproject.buttonManager();
   }
   
   function clearTaskBox(){
@@ -866,14 +867,13 @@ export let deleteingTasksofproject=(()=>{
 
   function buttonManager() {
     let allDeletingButton=document.querySelectorAll('#deleteTask');
-    let index=0;
-    allDeletingButton.forEach(button=>{
-
-      let buttonManager=new deleteTasks.deleteTask(button,index);
-      index++;
-
-      console.log("we here");
-    })
+   
+    for (let i = 0; i < allDeletingButton.length; i++) {
+      
+      let buttonManagement=new deleteTasks.deleteTask(allDeletingButton[i],i);
+      
+      
+    }
 
                 
 

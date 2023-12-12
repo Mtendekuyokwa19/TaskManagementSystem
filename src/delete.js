@@ -6,6 +6,7 @@ import { knowWhichsectiondialogis } from "./Dom";
 import { TaskManagement } from "./add";
 import { movingTasks } from "./Dom";
 
+
 export let deleteTasks=(()=>{
 
     class deleteTask{
@@ -13,8 +14,9 @@ export let deleteTasks=(()=>{
             this.button=button.addEventListener('click',function(e){
 
                 deletingSpecificTask(index);
+                TaskManagement.addingToallTasks()
                 movingTasks.placingTasks();
-            movingTasks.updateAlltasks()
+                movingTasks.updateAlltasks()
                 console.log("yes we work")
 
             })

@@ -9,6 +9,7 @@ import { TaskManagement } from "./add";
 import { notHomesection } from "./Dom.js";
 import { completeTask } from "./Dom.js";
 import { strikeOuteffect } from "./Dom.js";
+import { deleteingTasksofproject } from "./Dom.js";
 
 export function shiftProject(position){
     //   console.log(position);  
@@ -29,6 +30,8 @@ export class Taskineachproject{
            projectButtonActionsTogiveTasks.createTaskBoxforProject();
            projectButtonActionsTogiveTasks.navigatingTheProjectAndGivingTasks(index);
            completeTask.manageCheckbox();
+           deleteingTasksofproject.buttonManager()
+           
             
             })
          
