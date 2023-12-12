@@ -39,9 +39,10 @@ export let ProjectManagement=(()=>{
     }
 
     function FindProject(ProjectName) {
+
         for (let i = 0; i < allMaterials.allProjects.length; i++) {
         
-        if(ProjectName===allMaterials.allProjects[i].projectName)
+        if(ProjectName===allMaterials.allProjects[i].projectTitle)
      
       
              
@@ -229,3 +230,6 @@ return {todayDates,TomorrowDates,aDayafter}
 //creating default 
 export let spaceTravels=new ProjectManagement.createProject("space trip");
 ProjectManagement.addToAllProjects(spaceTravels);
+
+console.log(ProjectManagement.FindProject("space trip"))
+console.log(allMaterials.allProjects[0].projectTitle)
