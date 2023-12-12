@@ -385,7 +385,7 @@ function enterTask() {
   knowsection();
   completeTask.manageCheckbox();
 
-
+deleteingTasksofproject.buttonManager()
  
   
   
@@ -689,6 +689,7 @@ function homeButtonReset() {
     knowsection();
     completeTask.manageCheckbox();
     updatingCompletedTask()
+    deleteingTasksofproject.buttonManager()
     // settingAlltasksinHome()
 }
 
