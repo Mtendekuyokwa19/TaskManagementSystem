@@ -12,7 +12,7 @@ import topBoxImage from './images/girl.svg'
 import musicimage from './images/music.svg'
 import addTaskImage from './icons/createAdd.svg'
 import boypapers from './images/carryingpapers.svg'
-import {add, format} from 'date-fns';
+import {add, addDays, format} from 'date-fns';
 import { ProjectManagement } from './add.js'
 import { allMaterials } from './add.js'
 import { spaceTravels } from './add.js'
@@ -345,6 +345,7 @@ function addTask(){
 
     return 
   }
+
 let newTask=new TaskManagement.createTask(createTaskDialog.TaskName.value,createTaskDialog.TaskDescription.value,createTaskDialog.date.value,createTaskDialog.PriorityDropdown.value)
 newTask.Project=allMaterials.allProjects[TaskManagement.projectPos.position].projectTitle;
 TaskManagement.addTasktoProject(newTask);
@@ -565,7 +566,34 @@ let taskcards=(({title,description,date,priority,status},TaskBox=document.queryS
   
   function placingTasks() {
     clearTaskBox();
-  
+    if(knowWhichsectiondialogis.section==="calender"){
+
+      for (let i = 0; i < allMaterials.allProjects[TaskManagement.projectPos.position].projectList.length; i++) {
+        let task=allMaterials.allProjects[TaskManagement.projectPos.position].projectList[i];
+       
+        if (new Date(task.date).setHours(0,0,0,0)===addDays(new Date(),1).setHours(0,0,0,0)){
+
+
+          taskcards(task,document.querySelector('#taskBoxToday'));
+
+
+        }
+        else if(new Date(task.date).setHours(0,0,0,0)===addDays(new Date(),2).setHours(0,0,0,0)){
+
+          taskcards(task,document.querySelector('#taskBoxtomorrow'));
+
+
+
+        }
+       
+      
+       
+       
+      }
+
+    }
+   
+  else{
     for (let i = 0; i < allMaterials.allProjects[TaskManagement.projectPos.position].projectList.length; i++) {
       let task=allMaterials.allProjects[TaskManagement.projectPos.position].projectList[i];
       // console.log(task)
@@ -576,6 +604,7 @@ let taskcards=(({title,description,date,priority,status},TaskBox=document.queryS
      
      
     }
+  }
      deleteingTasksofproject.buttonManager();
   }
   
@@ -849,12 +878,17 @@ let orderTasks=(()=>{
     
   }
 
+  function addingTasksinCalender() {
+    
+  }
+
 calender.addEventListener('click',function (e) {
 
   arrangeTask();
   makeTheboxesForEachday()
   arrangeDates.TomorrowDates();
   arrangeDates.aDayafter()
+  knowWhichsectiondialogis.section="calender";
 })
 
 
