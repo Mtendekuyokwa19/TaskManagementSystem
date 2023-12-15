@@ -484,7 +484,7 @@ let statistics=(()=>{
     let cardDetails=["projectNumber","TaskNumber","completedNumber"]
     let icons=[briefcaseProjects,messageIcon,allTasksicon]
     let idNames=["numberOfProjectsdiv","numberOfTasksdiv","completedTasks"]
-    let staticsOfcard=[allMaterials.allProjects.length,allMaterials.allTasks.length,0]
+    let staticsOfcard=[allMaterials.allProjects.length-1,allMaterials.allTasks.length,0]
     let specificNameforEntry=["projectDetails","TaskDetails","completedTask"];
     let backdrops=["projectsBackdrop","tasksBackdrop","completedBackdrop"]
     
@@ -512,7 +512,7 @@ return{makeStatistics}
 function UpdateNumberOfProjects() {
   if(knowWhichsectiondialogis.section==="Home"){
   let ProjectNumber=document.querySelector('#projectNumber')
-  ProjectNumber.textContent=allMaterials.allProjects.length;
+  ProjectNumber.textContent=allMaterials.allProjects.length-1;
   }
 }
 export let movingTasks=(()=>{
@@ -651,7 +651,7 @@ return{defaultProject}
  function projectButtons(){
   let allprojectButtons=document.querySelectorAll('#project');
  
-  let index=0;
+  let index=1;
   allprojectButtons.forEach(projectButton=>{
    
     
@@ -707,6 +707,7 @@ return {refreshTaskBox,TaskBoxcleanup};
 let Homebutton=document.querySelector('#homeDiv');
 
 function homeButtonReset() {
+  TaskManagement.projectPos.position=0;
   movingfromOneprojecttoanother.refreshTaskBox();
     statistics.makeStatistics();
     movingTasks.makeTaskbox();
@@ -725,7 +726,7 @@ function homeButtonReset() {
 Homebutton.addEventListener('click',function(e){
 
   homeButtonReset();
-  TaskManagement.projectPos.position=0;
+  
 
 })
 

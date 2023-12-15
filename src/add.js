@@ -113,7 +113,7 @@ export let TaskManagement=(()=>{
    function addTasktoProject(task,project=allMaterials.allProjects[projectPos.position].projectList){
 
         project[project.length]=task;
-        // allMaterials.allTasks[allMaterials.allTasks.length]=task;
+       
         
         
         
