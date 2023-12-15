@@ -8,7 +8,6 @@ import { TaskManagement } from "./add";
 import { movingTasks } from "./Dom";
 
 
-
 export let deleteTasks=(()=>{
 
     class deleteTask{

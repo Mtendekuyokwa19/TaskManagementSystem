@@ -24,7 +24,6 @@ import { amountofCompletedTasks } from './add.js'
 import deleteicon from './icons/deleteIcons.svg'
 import todayIcon from './icons/today.svg'
 import { arrangeDates } from './add.js'
-
 import { deleteTasks } from './delete.js'
 import isThisWeek from 'date-fns/isThisWeek/index.js'
 

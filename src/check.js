@@ -4,7 +4,6 @@ import { knowWhichsectiondialogis } from "./Dom.js";
 import { allMaterials } from "./add.js";
 import { strikeOuteffect } from "./Dom.js";
 
-
 export class completeButtonforEachProject{
 
     constructor(TaskButton,index){
