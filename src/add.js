@@ -119,7 +119,7 @@ export let TaskManagement=(()=>{
         
         }
 function addingToallTasks() {
-allMaterials.allTasks.splice(0,allMaterials.allTasks.length)
+
 
 
     for (let index = 0; index < allMaterials.allProjects.length; index++) {
@@ -207,14 +207,14 @@ export let arrangeDates=(()=>{
         
     }
 
-    function aDayafter() {
+    function thisWeek() {
         for (let i = 0; i < allMaterials.allTasks.length; i++) {
             let dateOftask=new Date( allMaterials.allTasks[i].date).toISOString().slice(0, 10);
-            let aDayafter = add(new Date(),{days:2}).toISOString().slice(0, 10)
+            
 
            
-            if(dateOftask===aDayafter){
-                movingTasks.taskcards(allMaterials.allTasks[i],document.querySelector('#taskBoxtomorrow'))
+            if(isThisWeek(new Date(dateOftask))){
+                movingTasks.taskcards(allMaterials.allTasks[i])
             }
             
         }
@@ -223,7 +223,7 @@ export let arrangeDates=(()=>{
     }
 
 
-return {todayDates,ThisWeek,aDayafter}
+return {todayDates,TomorrowDates,aDayafter}
 
 })()
 

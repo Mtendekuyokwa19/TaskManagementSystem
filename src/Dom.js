@@ -25,9 +25,9 @@ import { amountofCompletedTasks } from './add.js'
 import deleteicon from './icons/deleteIcons.svg'
 import todayIcon from './icons/today.svg'
 import { arrangeDates } from './add.js'
+import { deleteProjects } from './delete.js'
 
 import { deleteTasks } from './delete.js'
-import isThisWeek from 'date-fns/isThisWeek/index.js'
 
 class createElementtoDom{
 
@@ -86,7 +86,7 @@ let TodayText=domElementMaker.domElementCreator('p',"TodayText",Today,"Today");
 
 let DatesArrangedButton=domElementMaker.domElementCreator('button',"calender",section);
 let Datesicon=domElementMaker.ImageLoadtoDOm(dateIcon,DatesArrangedButton,"Datesicon")
-let DatesText=domElementMaker.domElementCreator('p',"hometext",DatesArrangedButton,"This Week");
+let DatesText=domElementMaker.domElementCreator('p',"hometext",DatesArrangedButton,"Calender");
 
 let ProjectsButton=domElementMaker.domElementCreator('button',"Projects",section);
 let ProjectsIcon=domElementMaker.ImageLoadtoDOm(projectsIcon,ProjectsButton,"projectIcon")
@@ -221,7 +221,7 @@ createButtonsFromAllProjects();
 
 }
 
-function balancingprojects(){
+export function balancingprojects(){
   addProject();
   UpdateNumberOfProjects();
 
@@ -232,6 +232,7 @@ inputBoxcreateProjects.doneButton.addEventListener('click',function (e) {
   balancingprojects();
   projectButtons()
   e.preventDefault();
+ deletingProjectDom.deleteTheseletedProject()
   
   inputBoxcreateProjects.dialogBox.close();
   
@@ -342,14 +343,27 @@ createTaskDialog.cancelTask.addEventListener('click',function (e) {
 
 function addTask(){
 
+
   if(createTaskDialog.TaskName.value===""||createTaskDialog.TaskDescription.value===""||createTaskDialog.date.value===""){
 
     return 
   }
-
+ 
 let newTask=new TaskManagement.createTask(createTaskDialog.TaskName.value,createTaskDialog.TaskDescription.value,createTaskDialog.date.value,createTaskDialog.PriorityDropdown.value)
 newTask.Project=allMaterials.allProjects[TaskManagement.projectPos.position].projectTitle;
-TaskManagement.addTasktoProject(newTask);
+if(knowWhichsectiondialogis.section==="calender"){
+
+  TaskManagement.addTasktoProject(newTask,allMaterials.allProjects[0]);
+
+
+    
+}
+else{
+
+  TaskManagement.addTasktoProject(newTask);
+
+}
+
 deleteTasks.clearOverdue()
 TaskManagement.addingToallTasks();
 
@@ -423,17 +437,19 @@ function refresh() {
   
 }
 
-function createButtonsFromAllProjects(){
+export function createButtonsFromAllProjects(){
 
   refresh();
 
   let arrayOfprojects=allMaterials.allProjects;
 
-for (let i = 1; i < arrayOfprojects.length; i++) {
+for (let i = 0; i < arrayOfprojects.length; i++) {
  let button=domElementMaker.domElementCreator('button',"project",sidebar.divProjectsSection,"> "+arrayOfprojects[i].projectTitle)
  if(i===TaskManagement.projectPos.position){
     stylingSlelectedButtons.makingTheButtonGlow(button)
  } 
+ projectDiv.className="projectName"
+ closeDiv.className="projectName"
  button.className="projectName" ;
 
 }
@@ -485,7 +501,7 @@ let statistics=(()=>{
     let cardDetails=["projectNumber","TaskNumber","completedNumber"]
     let icons=[briefcaseProjects,messageIcon,allTasksicon]
     let idNames=["numberOfProjectsdiv","numberOfTasksdiv","completedTasks"]
-    let staticsOfcard=[allMaterials.allProjects.length,allMaterials.allTasks.length,0]
+    let staticsOfcard=[(allMaterials.allProjects.length)-1,allMaterials.allTasks.length,0]
     let specificNameforEntry=["projectDetails","TaskDetails","completedTask"];
     let backdrops=["projectsBackdrop","tasksBackdrop","completedBackdrop"]
     
@@ -510,10 +526,10 @@ let statistics=(()=>{
 return{makeStatistics}
 })()
 
-function UpdateNumberOfProjects() {
+export function UpdateNumberOfProjects() {
   if(knowWhichsectiondialogis.section==="Home"){
   let ProjectNumber=document.querySelector('#projectNumber')
-  ProjectNumber.textContent=allMaterials.allProjects.length;
+  ProjectNumber.textContent=allMaterials.allProjects.length-1;
   }
 }
 export let movingTasks=(()=>{
@@ -523,7 +539,7 @@ export let movingTasks=(()=>{
   return TaskBox
   }
    
-let taskcards=(({title,description,date,priority,status},TaskBox=document.querySelector('#TaskBox'))=>{
+let taskcards=(({title,description,date,priority,status,Project},TaskBox=document.querySelector('#TaskBox'))=>{
 
     let taskDiv=contentBoxelementMaker('div',"TaskDiv",TaskBox)
     
@@ -536,6 +552,7 @@ let taskcards=(({title,description,date,priority,status},TaskBox=document.queryS
     let taskTitle=contentBoxelementMaker('p',"taskTitle",taskDiv,title);
     let DescriptionTask=contentBoxelementMaker('p',"explainationTask",taskDiv,description)
     let buttonsManipulationDiv=contentBoxelementMaker('div',"buttonsManipulationDiv",taskDiv)
+    // let projectitbelongsto=contentBoxelementMaker('button',"projectItbelongsTo",buttonsManipulationDiv,Project)
     let PriorityTag=contentBoxelementMaker('button',"Priotrity",buttonsManipulationDiv,priority)
     let edit=contentBoxelementMaker('button',"editTask",buttonsManipulationDiv,"edit");
     let complete=contentBoxelementMaker('input',"completeTask",buttonsManipulationDiv,status);
@@ -568,44 +585,43 @@ let taskcards=(({title,description,date,priority,status},TaskBox=document.queryS
   
   function placingTasks() {
     clearTaskBox();
+
     if(knowWhichsectiondialogis.section==="calender"){
 
       for (let i = 0; i < allMaterials.allProjects[TaskManagement.projectPos.position].projectList.length; i++) {
         let task=allMaterials.allProjects[TaskManagement.projectPos.position].projectList[i];
-        // console.log(task)
-        console.log(task.date);
-       if(isThisWeek(new Date(task.date))){
        
-        taskcards(task);
+        if (new Date(task.date).setHours(0,0,0,0)===addDays(new Date(),1).setHours(0,0,0,0)){
 
 
-       } 
+          taskcards(task,document.querySelector('#taskBoxToday'));
+
+
+        }
+        else if(new Date(task.date).setHours(0,0,0,0)===addDays(new Date(),2).setHours(0,0,0,0)){
+
+          taskcards(task,document.querySelector('#taskBoxtomorrow'));
+
+
+
+        }
+       
       
-
-
-        
-       
-      
        
        
-      
+      }
 
     }
-
- 
-  }
+   
   else{
     for (let i = 0; i < allMaterials.allProjects[TaskManagement.projectPos.position].projectList.length; i++) {
       let task=allMaterials.allProjects[TaskManagement.projectPos.position].projectList[i];
       // console.log(task)
 
-      
-     taskcards(task);
-    
-     
-     
     }
   }
+   
+
      deleteingTasksofproject.buttonManager();
   }
   
@@ -631,6 +647,7 @@ let taskcards=(({title,description,date,priority,status},TaskBox=document.queryS
 
 return{placingTasks,updateAlltasks,makeTaskbox,taskcards};
 })()
+
 let taskBoxtokeepTasks=(()=>{
 let TaskBox=contentBoxelementMaker('div',"TaskBox",contentTobeupdatedChangingProjects.content);
 
@@ -649,7 +666,7 @@ export let defaultProjectButton=(()=>{
 return{defaultProject}
 })()
 
- function projectButtons(){
+ export function projectButtons(){
   let allprojectButtons=document.querySelectorAll('#project');
  
   let index=0;
@@ -707,7 +724,7 @@ return {refreshTaskBox,TaskBoxcleanup};
 
 let Homebutton=document.querySelector('#homeDiv');
 
-function homeButtonReset() {
+export function homeButtonReset() {
   movingfromOneprojecttoanother.refreshTaskBox();
     statistics.makeStatistics();
     movingTasks.makeTaskbox();
@@ -867,17 +884,13 @@ let orderTasks=(()=>{
   let calender=document.querySelector('#calender');
   function arrangeTask() {
     movingfromOneprojecttoanother.refreshTaskBox();
+    movingTasks.makeTaskbox()
+    arrangeDates.thisWeek()
     
   }
   function makeTheboxesForEachday() {
-    let HolderforDates=contentBoxelementMaker('div',"holderforDates",document.querySelector('#contentTobeUpdated'))
-    let TodayBox=contentBoxelementMaker('div',"TodayBox",HolderforDates)
-    let Todayheading=contentBoxelementMaker('p',"heading",TodayBox,"Tomorrow")
-    let taskboxToday=contentBoxelementMaker('div',"taskBoxToday",TodayBox)
-    let tomorrowBox=contentBoxelementMaker ('div',"tomorrowBox",HolderforDates);
+
    
-    let tomorrowHeading=contentBoxelementMaker('p',"tomorrowHeading",tomorrowBox,add(new Date(),{days:2}).toLocaleString('en-us',{day:'numeric',month:'long'}))
-    let taskTomorrowbox=contentBoxelementMaker('div',"taskBoxtomorrow",tomorrowBox)
     
   }
 
@@ -886,6 +899,11 @@ let orderTasks=(()=>{
   }
 
 calender.addEventListener('click',function (e) {
+
+  arrangeTask();
+  makeTheboxesForEachday()
+  arrangeDates.TomorrowDates();
+  arrangeDates.aDayafter()
   knowWhichsectiondialogis.section="calender";
   movingfromOneprojecttoanother.refreshTaskBox();
  movingTasks.makeTaskbox();
@@ -924,3 +942,4 @@ buttonManager();
 
 return {buttonManager}
 })()
+

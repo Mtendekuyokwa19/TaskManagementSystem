@@ -347,7 +347,7 @@ padding: 0px 10px;
 
 
   }
-  #projectsSection button{
+  #projectsSection button:first-child{
 
     background-color: transparent;
     border: none;
@@ -361,7 +361,7 @@ padding: 0px 10px;
     text-align: left;
 
   }
-  #projectsSection button:hover{
+  #projectsSection button:first-child:hover{
     background-color: #2d2f39;
 
 
@@ -641,6 +641,36 @@ gap: 12px;
 padding: 0px 37px;
 margin-top: 16px;
 
+
+}
+
+#projectDiv{
+
+
+  display: flex;
+  gap: 8px;
+
+}
+
+#close{
+
+  background-color: transparent;
+  border: none;
+ 
+  color:#828489;
+ font-weight: bold;
+ font-style: normal;
+ 
+  font-size: 14px;
+  text-align: center;
+
+
+
+}
+
+#close:hover{
+
+  color:rgb(185, 13, 13);
 
 }
 

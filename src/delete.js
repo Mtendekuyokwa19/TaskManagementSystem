@@ -7,7 +7,6 @@ import { TaskManagement } from "./add";
 import { movingTasks } from "./Dom";
 import { ProjectManagement } from "./add";
 
-
 export let deleteTasks=(()=>{
 
     class deleteTask{
@@ -15,9 +14,10 @@ export let deleteTasks=(()=>{
             this.button=button.addEventListener('click',function(e){
 
                 deletingSpecificTask(index);
-               
-              
-                deleteingTasksofproject.buttonManager()
+                TaskManagement.addingToallTasks()
+                movingTasks.placingTasks();
+                movingTasks.updateAlltasks()
+                console.log("yes we work")
 
             })
 
@@ -32,7 +32,7 @@ export let deleteTasks=(()=>{
                     if((new Date().setHours(0, 0, 0, 0) > new Date(allMaterials.allProjects[i].projectList[x].date).setHours(0, 0, 0, 0))){
 
                         allMaterials.allProjects[i].projectList.splice(x,1)
-                        console.log("You can't create a date in the past")
+                        
                         console.log(new Date(),new Date)
                     }
 
@@ -96,3 +96,4 @@ export let deleteTasks=(()=>{
 
        return {clearOverdue,deletingSpecificTask,deleteTask}
 })()
+
