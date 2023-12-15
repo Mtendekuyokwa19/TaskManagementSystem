@@ -1,4 +1,6 @@
 
+import { deleteingTasksofproject } from "./Dom.js";
+
 import { allMaterials } from "./add";
 import { spaceTravels } from "./add.js";
 import { ProjectManagement } from "./add";
@@ -9,7 +11,6 @@ import { TaskManagement } from "./add";
 import { notHomesection } from "./Dom.js";
 import { completeTask } from "./Dom.js";
 import { strikeOuteffect } from "./Dom.js";
-import { deleteingTasksofproject } from "./Dom.js";
 
 export function shiftProject(position){
     //   console.log(position);  

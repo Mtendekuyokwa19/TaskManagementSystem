@@ -1,8 +1,9 @@
+import { updatingCompletedTask } from "./Dom.js";
 import { TaskManagement } from "./add.js";
 import { knowWhichsectiondialogis } from "./Dom.js";
 import { allMaterials } from "./add.js";
 import { strikeOuteffect } from "./Dom.js";
-import { updatingCompletedTask } from "./Dom.js";
+
 
 export class completeButtonforEachProject{
 

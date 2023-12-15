@@ -1,5 +1,4 @@
 //creating the DOM
-
 import './style.css'
 import { Taskineachproject } from './project.js'
 import HeadImage from'./icons/linuxHead.png'

@@ -1,6 +1,7 @@
+import isThisWeek from "date-fns/isThisWeek/index.js";
 import { movingTasks } from "./Dom.js";
 import add from "date-fns/add";
-import isThisWeek from "date-fns/isThisWeek/index.js";
+
 export let allMaterials=(()=>{
 
     let allProjects=[];
