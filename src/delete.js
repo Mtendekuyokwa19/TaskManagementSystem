@@ -7,6 +7,7 @@ import { TaskManagement } from "./add";
 import { movingTasks } from "./Dom";
 import { ProjectManagement } from "./add";
 
+
 export let deleteTasks=(()=>{
 
     class deleteTask{
@@ -14,10 +15,9 @@ export let deleteTasks=(()=>{
             this.button=button.addEventListener('click',function(e){
 
                 deletingSpecificTask(index);
-                TaskManagement.addingToallTasks()
-                movingTasks.placingTasks();
-                movingTasks.updateAlltasks()
-                console.log("yes we work")
+               
+              
+                deleteingTasksofproject.buttonManager()
 
             })
 
@@ -52,6 +52,7 @@ export let deleteTasks=(()=>{
                
 
               let ProjectPosition=ProjectManagement.FindProject(allMaterials.allTasks[index].Project)
+              console.log(allMaterials.allTasks[0].Project)
 
               console.log("johnson");
               console.log(allMaterials.allTasks[index].Project,ProjectManagement.FindProject(allMaterials.allTasks[index].Project)              );
@@ -61,18 +62,29 @@ export let deleteTasks=(()=>{
                         console.log(allMaterials.allProjects[ProjectPosition].projectList[i])
                         allMaterials.allProjects[ProjectPosition].projectList.splice(i,1)
 
-                        return
+                     
                     }
-                    
+            TaskManagement.addingToallTasks()
+            movingTasks.placingTasks();
+            movingTasks.updateAlltasks()        
+
                 }
 
 
             }
-            else{
+           
+            else if((knowWhichsectiondialogis.section==="calender")){
 
-                allMaterials.allProjects[TaskManagement.projectPos.position].projectList.splice(index,1)
+                let ProjectPosition=ProjectManagement.FindProject(allMaterials.allTasks[index].Project)
 
-                console.log("mother goose")
+               console.log("this week")
+
+
+             
+
+                    
+                
+
 
             }
 

@@ -1,5 +1,6 @@
 import { movingTasks } from "./Dom.js";
 import add from "date-fns/add";
+import isThisWeek from "date-fns/isThisWeek/index.js";
 export let allMaterials=(()=>{
 
     let allProjects=[];
@@ -192,14 +193,14 @@ export let arrangeDates=(()=>{
         
     }
 
-    function TomorrowDates() {
+    function ThisWeek() {
         for (let i = 0; i < allMaterials.allTasks.length; i++) {
-            let dateOftask=new Date( allMaterials.allTasks[i].date).toISOString().slice(0, 10);
+            let dateOftask=new Date( allMaterials.allTasks[i].date)
             let Tomorrow = add(new Date(),{days:1}).toISOString().slice(0, 10)
 
            
-            if(dateOftask===Tomorrow){
-                movingTasks.taskcards(allMaterials.allTasks[i],document.querySelector('#taskBoxToday'))
+            if(isThisWeek(dateOftask)){
+                movingTasks.taskcards(allMaterials.allTasks[i])
             }
             
         }
@@ -222,14 +223,12 @@ export let arrangeDates=(()=>{
     }
 
 
-return {todayDates,TomorrowDates,aDayafter}
+return {todayDates,ThisWeek,aDayafter}
 
 })()
 
 
 //creating default 
-export let spaceTravels=new ProjectManagement.createProject("space trip");
-ProjectManagement.addToAllProjects(spaceTravels);
+export let defaultProject=new ProjectManagement.createProject("Default Project");
+ProjectManagement.addToAllProjects(defaultProject);
 
-console.log(ProjectManagement.FindProject("space trip"))
-console.log(allMaterials.allProjects[0].projectTitle)

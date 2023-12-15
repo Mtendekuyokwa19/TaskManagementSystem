@@ -27,6 +27,7 @@ import todayIcon from './icons/today.svg'
 import { arrangeDates } from './add.js'
 
 import { deleteTasks } from './delete.js'
+import isThisWeek from 'date-fns/isThisWeek/index.js'
 
 class createElementtoDom{
 
@@ -85,7 +86,7 @@ let TodayText=domElementMaker.domElementCreator('p',"TodayText",Today,"Today");
 
 let DatesArrangedButton=domElementMaker.domElementCreator('button',"calender",section);
 let Datesicon=domElementMaker.ImageLoadtoDOm(dateIcon,DatesArrangedButton,"Datesicon")
-let DatesText=domElementMaker.domElementCreator('p',"hometext",DatesArrangedButton,"Calender");
+let DatesText=domElementMaker.domElementCreator('p',"hometext",DatesArrangedButton,"This Week");
 
 let ProjectsButton=domElementMaker.domElementCreator('button',"Projects",section);
 let ProjectsIcon=domElementMaker.ImageLoadtoDOm(projectsIcon,ProjectsButton,"projectIcon")
@@ -372,6 +373,7 @@ function knowsection(){
   }
   else if(knowWhichsectiondialogis.section==="Today"){
       todayButtonFunctionalities.todayTask();
+      
 
   }
 
@@ -427,7 +429,7 @@ function createButtonsFromAllProjects(){
 
   let arrayOfprojects=allMaterials.allProjects;
 
-for (let i = 0; i < arrayOfprojects.length; i++) {
+for (let i = 1; i < arrayOfprojects.length; i++) {
  let button=domElementMaker.domElementCreator('button',"project",sidebar.divProjectsSection,"> "+arrayOfprojects[i].projectTitle)
  if(i===TaskManagement.projectPos.position){
     stylingSlelectedButtons.makingTheButtonGlow(button)
@@ -570,29 +572,28 @@ let taskcards=(({title,description,date,priority,status},TaskBox=document.queryS
 
       for (let i = 0; i < allMaterials.allProjects[TaskManagement.projectPos.position].projectList.length; i++) {
         let task=allMaterials.allProjects[TaskManagement.projectPos.position].projectList[i];
+        // console.log(task)
+        console.log(task.date);
+       if(isThisWeek(new Date(task.date))){
        
-        if (new Date(task.date).setHours(0,0,0,0)===addDays(new Date(),1).setHours(0,0,0,0)){
+        taskcards(task);
 
 
-          taskcards(task,document.querySelector('#taskBoxToday'));
+       } 
+      
 
 
-        }
-        else if(new Date(task.date).setHours(0,0,0,0)===addDays(new Date(),2).setHours(0,0,0,0)){
-
-          taskcards(task,document.querySelector('#taskBoxtomorrow'));
-
-
-
-        }
+        
        
       
        
        
-      }
+      
 
     }
-   
+
+ 
+  }
   else{
     for (let i = 0; i < allMaterials.allProjects[TaskManagement.projectPos.position].projectList.length; i++) {
       let task=allMaterials.allProjects[TaskManagement.projectPos.position].projectList[i];
@@ -725,6 +726,7 @@ function homeButtonReset() {
 Homebutton.addEventListener('click',function(e){
 
   homeButtonReset();
+  TaskManagement.projectPos.position=0;
 
 })
 
@@ -850,6 +852,7 @@ let todayButtonFunctionalities=(()=>{
     todayButton.addEventListener('click',function(e){
       
       knowWhichsectiondialogis.section="Today"
+      TaskManagement.projectPos.position=0;
       todayTask()
     })
 
@@ -883,12 +886,13 @@ let orderTasks=(()=>{
   }
 
 calender.addEventListener('click',function (e) {
-
-  arrangeTask();
-  makeTheboxesForEachday()
-  arrangeDates.TomorrowDates();
-  arrangeDates.aDayafter()
   knowWhichsectiondialogis.section="calender";
+  movingfromOneprojecttoanother.refreshTaskBox();
+ movingTasks.makeTaskbox();
+
+ arrangeDates.ThisWeek();
+  
+  deleteingTasksofproject.buttonManager()
 })
 
 
