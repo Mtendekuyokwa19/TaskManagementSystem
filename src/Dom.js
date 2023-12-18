@@ -386,8 +386,8 @@ function enterTask() {
   
   knowsection();
   completeTask.manageCheckbox();
+  deleteingTasksofproject.buttonManager()
 
-deleteingTasksofproject.buttonManager()
  
   
   
@@ -396,8 +396,11 @@ deleteingTasksofproject.buttonManager()
 createTaskDialog.createTask.addEventListener('click',function (e) {
 
   enterTask();
-
   
+   
+  
+
+ 
 })
 
 
@@ -564,7 +567,22 @@ let taskcards=(({title,description,date,priority,status},TaskBox=document.queryS
   
   
   });
-  
+
+  function resettingTaskboxAfterdeleteHome() {
+    clearTaskBox()
+    for (let i = 0; i < allMaterials.allTasks.length; i++) {
+      let task=allMaterials.allTasks[i];
+      // console.log(task)
+
+      
+     taskcards(task);
+    
+     
+     
+    }
+
+    
+  }  
   function placingTasks() {
     clearTaskBox();
     if(knowWhichsectiondialogis.section==="calender"){
@@ -605,7 +623,7 @@ let taskcards=(({title,description,date,priority,status},TaskBox=document.queryS
      
     }
   }
-     deleteingTasksofproject.buttonManager();
+  
   }
   
   function clearTaskBox(){
@@ -628,7 +646,7 @@ let taskcards=(({title,description,date,priority,status},TaskBox=document.queryS
 
 
 
-return{placingTasks,updateAlltasks,makeTaskbox,taskcards};
+return{placingTasks,updateAlltasks,makeTaskbox,taskcards,resettingTaskboxAfterdeleteHome};
 })()
 let taskBoxtokeepTasks=(()=>{
 let TaskBox=contentBoxelementMaker('div',"TaskBox",contentTobeupdatedChangingProjects.content);
@@ -854,6 +872,7 @@ let todayButtonFunctionalities=(()=>{
       knowWhichsectiondialogis.section="Today"
       TaskManagement.projectPos.position=0;
       todayTask()
+      deleteingTasksofproject.buttonManager()
     })
 
 

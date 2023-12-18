@@ -4,6 +4,7 @@ import { TaskManagement } from "./add.js";
 import { knowWhichsectiondialogis } from "./Dom.js";
 import { allMaterials } from "./add.js";
 import { strikeOuteffect } from "./Dom.js";
+import { ProjectManagement } from "./add.js";
 
 export class completeButtonforEachProject{
 
@@ -13,14 +14,9 @@ export class completeButtonforEachProject{
 
             
         if(this.checked){ 
-            if(knowWhichsectiondialogis.section==="Home"){
+            if(knowWhichsectiondialogis.section==="Home"||knowWhichsectiondialogis.section==="Today"){
            
-            let projectBox=TaskManagement.findingTask(allMaterials.allTasks[index])
-           
-            allMaterials.allProjects[projectBox.i].projectList[projectBox.x].status="done";
-           
-            strikeOuteffect.strikeoutWords(index);
-            updatingCompletedTask()
+          checkingFunction.CheckingInHome(index);
         }
         else{
             // console.log(allMaterials.allProjects)
@@ -30,14 +26,8 @@ export class completeButtonforEachProject{
             strikeOuteffect.strikeoutWords(index)
         };}
         else{
-            strikeOuteffect.strikeoutWords(index,"none")
-            allMaterials.allProjects[TaskManagement.projectPos.position].projectList[index].status="undone"
-            if(knowWhichsectiondialogis.section==="Home"){
-
-                updatingCompletedTask();
-
-            }
-            
+     checkingFunction.uncheckinginhome(index);
+     console.log("helo")
            
             
 
@@ -51,4 +41,32 @@ export class completeButtonforEachProject{
 
 
 }
+let checkingFunction=(()=>{
 
+function CheckingInHome(index){
+    let project=ProjectManagement.FindProject(allMaterials.allTasks[index].Project);
+    console.log(project)
+    let taskPosition=TaskManagement.HuntingForTasktodelete(project,allMaterials.allTasks[index].title)
+           
+    allMaterials.allProjects[project].projectList[taskPosition].status="done";
+   
+    strikeOuteffect.strikeoutWords(index);
+    updatingCompletedTask()
+
+
+}
+function uncheckinginhome(index) {
+   
+    let project=ProjectManagement.FindProject(allMaterials.allTasks[index].Project);
+    let taskPosition=TaskManagement.HuntingForTasktodelete(project,allMaterials.allTasks[index].title)
+           
+    allMaterials.allProjects[project].projectList[taskPosition].status="done";
+   
+    strikeOuteffect.strikeoutWords(index);
+    updatingCompletedTask()
+   
+    
+}
+
+return {CheckingInHome,uncheckinginhome}
+})()

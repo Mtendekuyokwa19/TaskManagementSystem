@@ -82,6 +82,22 @@ export let TaskManagement=(()=>{
     
     
     }
+    //do not forget to add prevention of duplicates in each project
+    function HuntingForTasktodelete(projectNumber,title){
+
+        for (let i = 0; i< allMaterials.allProjects[projectNumber].projectList.length; i++) {
+          
+            if (title===allMaterials.allProjects[projectNumber].projectList[i].title) {
+
+                return i;
+            }
+           
+        }
+
+
+
+
+    }
 
    
 
@@ -134,7 +150,7 @@ allMaterials.allTasks.splice(0,allMaterials.allTasks.length)
 }
 
 
-return {createTask,findingTask,addTasktoProject,projectPos,addingToallTasks}
+return {createTask,findingTask,addTasktoProject,projectPos,addingToallTasks,HuntingForTasktodelete}
 
 
 })()
@@ -142,13 +158,14 @@ return {createTask,findingTask,addTasktoProject,projectPos,addingToallTasks}
 
 //the arrys should have a name and the tasks should know where they belong to
 
-function placeTaskinAllTasks() {
-
+export function placeTaskinAllTasks() {
+allMaterials.allTasks.splice(0,allMaterials.allTasks.length)
+let index=0;
     for (let i = 0; i < allMaterials.allProjects.length; i++) {
 
-        for (let x = 0; x <allMaterials.allProjects["projectList"].length; x++) {
-            allMaterials.allTasks[i]=allMaterials.allProjects["projectList"][x]
-            
+        for (let x = 0; x <allMaterials.allProjects[i].projectList.length; x++) {
+            allMaterials.allTasks[index]=allMaterials.allProjects[i].projectList[x]
+            index++;
         }
         
         

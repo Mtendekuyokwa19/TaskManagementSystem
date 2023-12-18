@@ -1,6 +1,6 @@
 
 
-import { deleteingTasksofproject } from "./Dom.js";
+import { deleteingTasksofproject, knowWhichsectiondialogis } from "./Dom.js";
 import { allMaterials } from "./add";
 import { spaceTravels } from "./add.js";
 import { ProjectManagement } from "./add";
@@ -24,7 +24,8 @@ export class Taskineachproject{
         this.projectButton=projectButton.addEventListener('click',function(e){
             notHomesection();
            shiftProject(index)
-        //    strikeOuteffect.strikeoutWords();
+        console.log(TaskManagement.projectPos.position)
+        console.log(knowWhichsectiondialogis.section)
            stylingSlelectedButtons.returnAllbuttonstlyesTodefault();
            stylingSlelectedButtons.makingTheButtonGlow(projectButton);
            movingfromOneprojecttoanother.refreshTaskBox();

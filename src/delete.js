@@ -7,6 +7,7 @@ import { deleteingTasksofproject } from "./Dom";
 import { knowWhichsectiondialogis } from "./Dom";
 import { TaskManagement } from "./add";
 import { movingTasks } from "./Dom";
+import { placeTaskinAllTasks } from "./add";
 
 
 export let deleteTasks=(()=>{
@@ -46,54 +47,44 @@ export let deleteTasks=(()=>{
             
         }
 
-        function deletingSpecificTask(index) {
+ function deletingSpecificTask(index) {
+if(TaskManagement.projectPos.position>0){
+    deletingTaskInProjects(index)
+ 
+    return
+}
 
-            if(knowWhichsectiondialogis.section==="Home"){
+deletingTaskinHome(index)
 
-               
+   
+}
 
-              let ProjectPosition=ProjectManagement.FindProject(allMaterials.allTasks[index].Project)
-              console.log(allMaterials.allTasks[0].Project)
-
-              console.log("johnson");
-              console.log(allMaterials.allTasks[index].Project,ProjectManagement.FindProject(allMaterials.allTasks[index].Project)              );
-                for (let i = 0; i < allMaterials.allProjects[ProjectPosition].projectList.length; i++) {
-                    
-                    if (allMaterials.allTasks[index].title===allMaterials.allProjects[ProjectPosition].projectList[i].title) {
-                        console.log(allMaterials.allProjects[ProjectPosition].projectList[i])
-                        allMaterials.allProjects[ProjectPosition].projectList.splice(i,1)
-
-                     
-                    }
-            TaskManagement.addingToallTasks()
-            movingTasks.placingTasks();
-            movingTasks.updateAlltasks()        
-
-                }
-
-
-            }
-           
-            else if((knowWhichsectiondialogis.section==="calender")){
-
-                let ProjectPosition=ProjectManagement.FindProject(allMaterials.allTasks[index].Project)
-
-               console.log("this week")
-
-
-             
-
-                    
-                
-
-
-            }
 
             
             
-        }
+  
+  function deletingTaskinHome(index) {
+        let project=ProjectManagement.FindProject(allMaterials.allTasks[index].Project);
+        let taskPosition=TaskManagement.HuntingForTasktodelete(project,allMaterials.allTasks[index].title)
+    
+        allMaterials.allProjects[project].projectList.splice(taskPosition,1);
+        placeTaskinAllTasks();
+        console.log(allMaterials.allProjects)
+        console.log(allMaterials.allTasks)
+        movingTasks.resettingTaskboxAfterdeleteHome();
+        movingTasks.updateAlltasks();
+       } 
+       
+function deletingTaskInProjects(index){
+        allMaterials.allProjects[TaskManagement.projectPos.position].projectList.splice(index,1);
+        TaskManagement.addingToallTasks();
         
+       
+      movingTasks.placingTasks()
+     
 
+
+       }
 
        return {clearOverdue,deletingSpecificTask,deleteTask}
 })()
