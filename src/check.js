@@ -68,8 +68,6 @@ function checkingToday(index) {
     allMaterials.allProjects[project].projectList[taskPosition].status="undone";
     strikeOuteffect.strikeoutWords(index);
 
-
-    
 }
 function checkingInprojects(index) {
     allMaterials.allProjects[TaskManagement.projectPos.position].projectList[index].status="done";
