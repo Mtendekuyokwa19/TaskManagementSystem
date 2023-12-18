@@ -1,6 +1,6 @@
 
 import { updatingCompletedTask } from "./Dom.js";
-import { TaskManagement } from "./add.js";
+import { TaskManagement, arrangeDates } from "./add.js";
 import { knowWhichsectiondialogis } from "./Dom.js";
 import { allMaterials } from "./add.js";
 import { strikeOuteffect } from "./Dom.js";
@@ -14,20 +14,25 @@ export class completeButtonforEachProject{
 
             
         if(this.checked){ 
-            if(knowWhichsectiondialogis.section==="Home"||knowWhichsectiondialogis.section==="Today"||knowWhichsectiondialogis.section==="calender"){
-           
-          checkingFunction.CheckingInHome(index);
+
+       
+          if(TaskManagement.projectPos.position<1){
+
+            checkingFunction.CheckingInHome(index);
+
+          }
+          else(TaskManagement.projectPos.position>0);{
+                checkingFunction.checkingInprojects(index)
+
+          }
+          
+   
+         
         }
-        else{
-            // console.log(allMaterials.allProjects)
-            allMaterials.allProjects[TaskManagement.projectPos.position].projectList[index].status="done"
-            // console.log(allMaterials.allProjects[TaskManagement.projectPos.position].projectList[index].status)
-            
-            strikeOuteffect.strikeoutWords(index)
-        };}
+       
         else{
      checkingFunction.uncheckinginhome(index);
-     console.log("helo")
+     
            
             
 
@@ -55,6 +60,25 @@ function CheckingInHome(index){
 
 
 }
+function checkingToday(index) {
+    let todayTasks=arrangeDates.todayDates();
+    let project=ProjectManagement.FindProject(todayTasks[index].Project)
+    let taskPosition=TaskManagement.HuntingForTasktodelete(project,allMaterials.today[index].title)
+
+    allMaterials.allProjects[project].projectList[taskPosition].status="undone";
+    strikeOuteffect.strikeoutWords(index);
+
+
+    
+}
+function checkingInprojects(index) {
+    allMaterials.allProjects[TaskManagement.projectPos.position].projectList[index].status="done";
+   
+    strikeOuteffect.strikeoutWords(index);
+    
+    
+}
+
 function uncheckinginhome(index) {
    
     let project=ProjectManagement.FindProject(allMaterials.allTasks[index].Project);
@@ -65,8 +89,8 @@ function uncheckinginhome(index) {
     strikeOuteffect.strikeoutWords(index,"none");
     updatingCompletedTask()
    
-    
+    console.log("frogEyas")
 }
 
-return {CheckingInHome,uncheckinginhome}
+return {CheckingInHome,uncheckinginhome,checkingToday,checkingInprojects}
 })()

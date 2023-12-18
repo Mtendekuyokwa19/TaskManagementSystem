@@ -7,9 +7,11 @@ export let allMaterials=(()=>{
 
     let allProjects=[];
     let allTasks=[];
+    let thisWeek=[];
+    let today=[];
   
 
-return {allProjects,allTasks}
+return {allProjects,allTasks,thisWeek,today}
 
 })()
 
@@ -205,9 +207,15 @@ export let arrangeDates=(()=>{
            
             if(dateOftask===today){
                 movingTasks.taskcards(allMaterials.allTasks[i])
+                
+                allMaterials.today[allMaterials.today.length]=allMaterials.allTasks[i];
+
             }
             
+
         }
+
+        return allMaterials.today;
         
     }
 

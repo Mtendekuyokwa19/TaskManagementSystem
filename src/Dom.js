@@ -872,6 +872,7 @@ let todayButtonFunctionalities=(()=>{
       knowWhichsectiondialogis.section="Today"
       TaskManagement.projectPos.position=0;
       todayTask()
+      completeTask.manageCheckbox();
       deleteingTasksofproject.buttonManager()
     })
 
