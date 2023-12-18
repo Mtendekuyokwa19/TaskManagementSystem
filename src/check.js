@@ -14,7 +14,7 @@ export class completeButtonforEachProject{
 
             
         if(this.checked){ 
-            if(knowWhichsectiondialogis.section==="Home"||knowWhichsectiondialogis.section==="Today"){
+            if(knowWhichsectiondialogis.section==="Home"||knowWhichsectiondialogis.section==="Today"||knowWhichsectiondialogis.section==="calender"){
            
           checkingFunction.CheckingInHome(index);
         }
@@ -60,9 +60,9 @@ function uncheckinginhome(index) {
     let project=ProjectManagement.FindProject(allMaterials.allTasks[index].Project);
     let taskPosition=TaskManagement.HuntingForTasktodelete(project,allMaterials.allTasks[index].title)
            
-    allMaterials.allProjects[project].projectList[taskPosition].status="done";
+    allMaterials.allProjects[project].projectList[taskPosition].status="undone";
    
-    strikeOuteffect.strikeoutWords(index);
+    strikeOuteffect.strikeoutWords(index,"none");
     updatingCompletedTask()
    
     
