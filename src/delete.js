@@ -14,6 +14,7 @@ import { homeButtonReset } from "./Dom";
 import { todayButtonFunctionalities } from "./Dom";
 import { orderTasks } from "./Dom";
 import { deleteProjectDom } from "./Dom";
+import { updatingCompletedTask } from "./Dom";
 
 
 export let deleteTasks=(()=>{
@@ -79,6 +80,15 @@ deletingTaskinHome(index)
         console.log(allMaterials.allTasks)
         movingTasks.resettingTaskboxAfterdeleteHome();
         movingTasks.updateAlltasks();
+      if(knowWhichsectiondialogis.section==="Home"){
+        updatingCompletedTask();
+
+
+      }
+       
+           
+            
+        
        } 
        
 function deletingTaskInProjects(index){
@@ -105,9 +115,10 @@ class removeProject{
 
             eraseProject(index)
             createButtonsFromAllProjects()
-            positionAndrefreshing(index)
-            
+           
+          
             deleteProjectDom.eraseProject()
+            positionAndrefreshing(index)
             
         })
 
@@ -134,7 +145,8 @@ function positionAndrefreshing(index) {
 
     if(knowWhichsectiondialogis.section==="Home"){
         homeButtonReset()
-
+       
+        
     }
     else if(knowWhichsectiondialogis.section==="Today"){
 

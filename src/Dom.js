@@ -28,6 +28,7 @@ import { arrangeDates } from './add.js'
 import { deleteTasks } from './delete.js'
 import isThisWeek from 'date-fns/isThisWeek/index.js'
 import { deleteProject } from './delete.js'
+import { editingTask } from './edit.js'
 
 class createElementtoDom{
 
@@ -396,6 +397,7 @@ function enterTask() {
   knowsection();
   completeTask.manageCheckbox();
   deleteingTasksofproject.buttonManager()
+  editingTheTask.editFunctionalities()
 
  
   
@@ -416,6 +418,8 @@ createTaskDialog.createTask.addEventListener('click',function (e) {
 
 inputBoxcreateProjects.cancelButton.addEventListener('click',function(e) {
   createButtonsFromAllProjects();
+  editingTheTask.editFunctionalities()
+  movingTasks.placingTasks();
   
   e.preventDefault();
   
@@ -777,7 +781,8 @@ export function homeButtonReset() {
     completeTask.manageCheckbox();
     updatingCompletedTask()
     deleteingTasksofproject.buttonManager()
-    // settingAlltasksinHome()
+    editingTheTask.editFunctionalities();
+    
 }
 
 Homebutton.addEventListener('click',function(e){
@@ -887,9 +892,9 @@ function keepingStrikeOut({status},) {
 
 export function updatingCompletedTask() {
   let updateTask=document.querySelector('#completedNumber');
-  let numbers=amountofCompletedTasks.countCompletedTasks()
-  updateTask.textContent=numbers;
-  // console.log(amountofCompletedTasks.countCompletedTasks());
+  
+  updateTask.textContent=amountofCompletedTasks.countCompletedTasks();
+
 }
 
 updatingCompletedTask();
@@ -911,7 +916,8 @@ export let todayButtonFunctionalities=(()=>{
       TaskManagement.projectPos.position=0;
       todayTask()
       completeTask.manageCheckbox();
-      deleteingTasksofproject.buttonManager()
+      deleteingTasksofproject.buttonManager();
+      editingTheTask.editFunctionalities();
       
     }
     todayButton.addEventListener('click',function(e){
@@ -952,6 +958,7 @@ export let orderTasks=(()=>{
    arrangeDates.ThisWeek();
     
     deleteingTasksofproject.buttonManager()
+    editingTheTask.editFunctionalities();
   }
 
 calender.addEventListener('click',function (e) {
@@ -989,7 +996,56 @@ buttonManager();
 return {buttonManager}
 })()
 
+export let editingTheTask=(()=>{
 
+ 
+
+  function editFunctionalities() {
+    let allEditbtns=document.querySelectorAll('#editTask')
+    let index=0;
+    allEditbtns.forEach(allEditbtns=>{
+
+      let Task=new editingTask(allEditbtns,index)
+      index++
+    })
+    
+  }
+
+
+
+
+editFunctionalities()
+return {editFunctionalities}
+
+})()
+
+export let dialogForEdit=(()=>{
+
+
+  function createDialogBox(task) {
+
+    createTaskDialog.dialogTask.showModal()
+    placeholderValues(task)
+
+    
+    
+  }
+  function placeholderValues({title,description,date,priority}){
+
+    let Name=document.querySelector('#TaskName');
+    Name.value=title;
+    let descriptionOfTask=document.querySelector('#TaskDescription')
+    descriptionOfTask.value=description;
+    let dateofTask=document.querySelector('#Date');
+    dateofTask.defaultValue=new Date(date);
+    let Priority=document.querySelector('#selectDropDown')
+    Priority.value=priority;
+  }
+
+
+
+return {createDialogBox};
+})()
 
 
 
