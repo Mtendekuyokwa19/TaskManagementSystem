@@ -8,6 +8,11 @@ import { knowWhichsectiondialogis } from "./Dom";
 import { TaskManagement } from "./add";
 import { movingTasks } from "./Dom";
 import { placeTaskinAllTasks } from "./add";
+import { creatingProject } from "./Dom";
+import { createButtonsFromAllProjects } from "./Dom";
+import { homeButtonReset } from "./Dom";
+import { todayButtonFunctionalities } from "./Dom";
+import { orderTasks } from "./Dom";
 
 
 export let deleteTasks=(()=>{
@@ -89,3 +94,63 @@ function deletingTaskInProjects(index){
        return {clearOverdue,deletingSpecificTask,deleteTask}
 })()
 
+export let deleteProject=(()=>{
+
+class removeProject{
+
+    constructor(ProjectButton,index){
+
+        this.ProjectButton=ProjectButton.addEventListener('click',function (e) {
+
+            eraseProject(index)
+            createButtonsFromAllProjects()
+            positionAndrefreshing(index)
+  
+
+            
+        })
+
+
+        
+    }
+
+
+
+
+}
+function eraseProject(index) {
+    allMaterials.allProjects.splice(index,1);
+    TaskManagement.addingToallTasks();
+    
+}
+function goToHome(index) {
+    if (TaskManagement.projectPos.position===index) {
+       
+    }
+    
+}
+function positionAndrefreshing(index) {
+
+    if(knowWhichsectiondialogis.section==="Home"){
+        homeButtonReset()
+
+    }
+    else if(knowWhichsectiondialogis.section==="Today"){
+
+        todayButtonFunctionalities.todayRefresh()
+    }
+    else if(knowWhichsectiondialogis.section==="calender"){
+        orderTasks.CalenderRefresh()
+
+    }
+    else (TaskManagement.projectPos.position===index);{
+        homeButtonReset();
+
+
+    }
+    
+}
+
+
+return {removeProject}
+})()

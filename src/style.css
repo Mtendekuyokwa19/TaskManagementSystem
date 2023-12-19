@@ -361,7 +361,7 @@ padding: 0px 10px;
     text-align: left;
 
   }
-  #projectsSection button:hover{
+  #projectsSection button:first-child:hover{
     background-color: #2d2f39;
 
 
@@ -644,3 +644,16 @@ margin-top: 16px;
 
 }
 
+#HoldProject{
+
+  display: flex;
+  gap:14px;
+
+
+}
+
+#HoldProject button:last-child:hover{
+
+color: red;
+
+}
