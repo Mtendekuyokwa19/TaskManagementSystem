@@ -443,7 +443,7 @@ deleteProject.remove()
   })
   
 }
-let deleteProjectDom=(()=>{
+export let deleteProjectDom=(()=>{
 
   function eraseProject() {
     let allDeleteProjectbtns=document.querySelectorAll('#removeProject');

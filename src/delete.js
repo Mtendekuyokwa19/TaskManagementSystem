@@ -13,6 +13,7 @@ import { createButtonsFromAllProjects } from "./Dom";
 import { homeButtonReset } from "./Dom";
 import { todayButtonFunctionalities } from "./Dom";
 import { orderTasks } from "./Dom";
+import { deleteProjectDom } from "./Dom";
 
 
 export let deleteTasks=(()=>{
@@ -105,8 +106,8 @@ class removeProject{
             eraseProject(index)
             createButtonsFromAllProjects()
             positionAndrefreshing(index)
-  
-
+            
+            deleteProjectDom.eraseProject()
             
         })
 
