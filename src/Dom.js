@@ -27,6 +27,7 @@ import todayIcon from './icons/today.svg'
 import { arrangeDates } from './add.js'
 import { deleteTasks } from './delete.js'
 import isThisWeek from 'date-fns/isThisWeek/index.js'
+import { deleteProject } from './delete.js'
 
 class createElementtoDom{
 
@@ -228,16 +229,24 @@ function balancingprojects(){
 
 inputBoxcreateProjects.doneButton.addEventListener('click',function (e) {
   
-  balancingprojects();
-  projectButtons()
-  e.preventDefault();
-  
+ creatingProject()
+ e.preventDefault();
   inputBoxcreateProjects.dialogBox.close();
   
    
   
  
 });
+
+export function creatingProject(){
+
+  balancingprojects();
+  projectButtons()
+  
+  deleteProjectDom.eraseProject()
+
+
+}
 
 export let stylingSlelectedButtons=(()=>{
   function makingTheButtonGlow(button){
@@ -416,6 +425,16 @@ inputBoxcreateProjects.cancelButton.addEventListener('click',function(e) {
 
 function refresh() {
   let projects=document.querySelectorAll('.projectName');
+  let HoldProject=document.querySelectorAll('#HoldProject')
+  let deleteProject=document.querySelectorAll('#removeProject')
+  deleteProject.forEach(deleteProject=>{
+
+deleteProject.remove()
+
+  })
+  HoldProject.forEach(HoldProject=>{
+    HoldProject.remove()
+  })
 
   projects.forEach(projects=>{
     // console.log(projects);
@@ -424,15 +443,35 @@ function refresh() {
   })
   
 }
+let deleteProjectDom=(()=>{
 
-function createButtonsFromAllProjects(){
+  function eraseProject() {
+    let allDeleteProjectbtns=document.querySelectorAll('#removeProject');
+    let index=1;
+    allDeleteProjectbtns.forEach(btn=>{
+
+      let closeButton=new deleteProject.removeProject(btn,index)
+
+      index++;
+    })
+    
+  }
+
+eraseProject()
+
+return {eraseProject}
+})()
+
+export function createButtonsFromAllProjects(){
 
   refresh();
 
   let arrayOfprojects=allMaterials.allProjects;
 
 for (let i = 1; i < arrayOfprojects.length; i++) {
- let button=domElementMaker.domElementCreator('button',"project",sidebar.divProjectsSection,"> "+arrayOfprojects[i].projectTitle)
+  let containButtons=domElementMaker.domElementCreator('div',"HoldProject",sidebar.divProjectsSection)
+ let button=domElementMaker.domElementCreator('button',"project",containButtons,"> "+arrayOfprojects[i].projectTitle)
+ let removeProjectbtn=domElementMaker.domElementCreator('button',"removeProject",containButtons,"X")
  if(i===TaskManagement.projectPos.position){
     stylingSlelectedButtons.makingTheButtonGlow(button)
  } 
@@ -724,7 +763,7 @@ return {refreshTaskBox,TaskBoxcleanup};
 
 let Homebutton=document.querySelector('#homeDiv');
 
-function homeButtonReset() {
+export function homeButtonReset() {
   TaskManagement.projectPos.position=0;
   movingfromOneprojecttoanother.refreshTaskBox();
     statistics.makeStatistics();
@@ -855,7 +894,7 @@ export function updatingCompletedTask() {
 
 updatingCompletedTask();
 
-let todayButtonFunctionalities=(()=>{
+export let todayButtonFunctionalities=(()=>{
 
     let todayButton=sidebar.Today;
 
@@ -867,22 +906,26 @@ let todayButtonFunctionalities=(()=>{
       
       
     }
-    todayButton.addEventListener('click',function(e){
-      
+    function todayRefresh() {
       knowWhichsectiondialogis.section="Today"
       TaskManagement.projectPos.position=0;
       todayTask()
       completeTask.manageCheckbox();
       deleteingTasksofproject.buttonManager()
+      
+    }
+    todayButton.addEventListener('click',function(e){
+      
+      todayRefresh()
     })
 
 
 
-return {todayTask}
+return {todayTask,todayRefresh}
 })()
 
 
-let orderTasks=(()=>{
+export let orderTasks=(()=>{
 
   let calender=document.querySelector('#calender');
   function arrangeTask() {
@@ -901,25 +944,26 @@ let orderTasks=(()=>{
     
   }
 
-  function addingTasksinCalender() {
+  function CalenderRefresh() {
+    knowWhichsectiondialogis.section="calender";
+    movingfromOneprojecttoanother.refreshTaskBox();
+   movingTasks.makeTaskbox();
+  
+   arrangeDates.ThisWeek();
     
+    deleteingTasksofproject.buttonManager()
   }
 
 calender.addEventListener('click',function (e) {
-  knowWhichsectiondialogis.section="calender";
-  movingfromOneprojecttoanother.refreshTaskBox();
- movingTasks.makeTaskbox();
-
- arrangeDates.ThisWeek();
-  
-  deleteingTasksofproject.buttonManager()
+  CalenderRefresh()
+ 
 })
 
 
 
-
+return {CalenderRefresh}
 })()
-// deleteingTasks.clearOverdue()
+
 
 export let deleteingTasksofproject=(()=>{
 
@@ -944,4 +988,8 @@ buttonManager();
 
 return {buttonManager}
 })()
+
+
+
+
 
