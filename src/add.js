@@ -151,8 +151,20 @@ allMaterials.allTasks.splice(0,allMaterials.allTasks.length)
     
 }
 
+function replaceTask(task,position) {
 
-return {createTask,findingTask,addTasktoProject,projectPos,addingToallTasks,HuntingForTasktodelete}
+
+console.log(task.Project)
+
+    allMaterials.allProjects[ProjectManagement.FindProject(task.Project)].projectList[position]=task
+
+
+    
+addingToallTasks()
+}
+
+
+return {createTask,findingTask,addTasktoProject,projectPos,addingToallTasks,HuntingForTasktodelete,replaceTask}
 
 
 })()

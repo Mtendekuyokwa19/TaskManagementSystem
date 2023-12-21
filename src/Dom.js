@@ -334,6 +334,9 @@ return {dialogTask,cancelTask,createTask,TaskName,TaskDescription,PriorityDropdo
 
 createTaskicon.addTask.addEventListener('click',function (e) {
   createTaskDialog.dialogTask.showModal();
+removeEventListenersFrombtn("createTask")
+let createTaskbtn=document.querySelector('#createTask')
+createTaskbtn.addEventListener('click',enterTask)
   
 })
 
@@ -404,15 +407,7 @@ function enterTask() {
   
 }
 
-createTaskDialog.createTask.addEventListener('click',function (e) {
 
-  enterTask();
-  
-   
-  
-
- 
-})
 
 
 
@@ -801,7 +796,7 @@ export let projectButtonActionsTogiveTasks=(()=>{
     TaskBoxforProject.className=".contentToRemove";
     
     
-    // return TaskBoxforProjectknowWhichsectiondialogis.section="Today"
+   
     }
 
   function navigatingTheProjectAndGivingTasks(index){
@@ -1037,15 +1032,75 @@ export let dialogForEdit=(()=>{
     let descriptionOfTask=document.querySelector('#TaskDescription')
     descriptionOfTask.value=description;
     let dateofTask=document.querySelector('#Date');
-    dateofTask.defaultValue=new Date(date);
+    dateofTask.value=date;
     let Priority=document.querySelector('#selectDropDown')
     Priority.value=priority;
   }
 
+  function doneButton() {
+    let Name=document.querySelector('#TaskName');
+   
+    let descriptionOfTask=document.querySelector('#TaskDescription')
+ 
+    let dateofTask=document.querySelector('#Date');
+  
+    let Priority=document.querySelector('#selectDropDown')
 
 
-return {createDialogBox};
+    let modifiedTask=new TaskManagement.createTask(Name.value,descriptionOfTask.value,dateofTask.value,Priority.value)
+    
+    return modifiedTask
+  }
+function managetask(position){
+
+  let task=doneButton()
+  if(TaskManagement.projectPos.position<1){
+   task.Project=allMaterials.allTasks[position].Project
+   task.status=allMaterials.allTasks[position].status
+  
+  }
+  else(TaskManagement.projectPos.position>0);{
+    task.Project=allMaterials.allProjects[TaskManagement.projectPos.position].projectTitle
+    // task.status=allMaterials.allProjects[TaskManagement.projectPos.position].
+  }
+
+ 
+
+TaskManagement.replaceTask(task,position);
+console.log(task)
+
+}
+
+
+  function createTask(position){
+    let Createbtn=document.querySelector('#createTask');
+    Createbtn.removeEventListener('click',enterTask,false)
+  Createbtn.addEventListener('click',function (e) {
+    managetask(position)
+    configureEverything()
+  })
+
+
+
+
+  }
+  function configureEverything() {
+    
+    movingTasks.placingTasks();
+    deleteingTasksofproject.buttonManager()
+    completeTask.manageCheckbox();
+    editingTheTask.editFunctionalities()
+    createTaskDialog.dialogTask.close()
+  }
+
+
+
+return {createDialogBox,createTask,managetask,configureEverything};
 })()
 
-
+function removeEventListenersFrombtn(id) {
+  var old_element = document.getElementById(id);
+var new_element = old_element.cloneNode(true);
+old_element.parentNode.replaceChild(new_element, old_element);
+}
 
