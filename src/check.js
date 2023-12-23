@@ -22,7 +22,7 @@ export class completeButtonforEachProject{
             checkingFunction.CheckingInHome(index);
 
           }
-          else(TaskManagement.projectPos.position>0);{
+          else if(TaskManagement.projectPos.position>0){
                 checkingFunction.checkingInprojects(index)
 
           }
@@ -32,7 +32,15 @@ export class completeButtonforEachProject{
         }
        
         else{
-     checkingFunction.uncheckinginhome(index);
+            if (TaskManagement.projectPos.position>0) {
+                checkingFunction.uncheckinginProjects(index)
+            }
+            else if (TaskManagement.projectPos.position<1){
+
+                checkingFunction.uncheckinginhome(index);
+
+            }
+     
      
            
             
@@ -74,8 +82,9 @@ function checkingToday(index) {
 
 }
 function checkingInprojects(index) {
+
     allMaterials.allProjects[TaskManagement.projectPos.position].projectList[index].status="done";
-   
+   console.log( allMaterials.allProjects[TaskManagement.projectPos.position].projectList[index])
     strikeOuteffect.strikeoutWords(index);
     
     
@@ -91,8 +100,18 @@ function uncheckinginhome(index) {
     strikeOuteffect.strikeoutWords(index,"none");
     updatingCompletedTask()
    
-    console.log("frogEyas")
+    
 }
 
-return {CheckingInHome,uncheckinginhome,checkingToday,checkingInprojects}
+function uncheckinginProjects(index) {
+    let project=ProjectManagement.FindProject(allMaterials.allTasks[index].Project);
+    let taskPosition=TaskManagement.HuntingForTasktodelete(project,allMaterials.allTasks[index].title)
+           
+    allMaterials.allProjects[project].projectList[taskPosition].status="undone";
+   
+    strikeOuteffect.strikeoutWords(index,"none");
+    
+}
+
+return {CheckingInHome,uncheckinginhome,checkingToday,checkingInprojects,uncheckinginProjects}
 })()
