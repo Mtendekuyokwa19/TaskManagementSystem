@@ -13,12 +13,12 @@ A task management system developed using vanilla JS and css. The development pro
 
 #### Installation
 1. clone the repo
-- `git@github.com:Mtendekuyokwa19/TaskManagementSystem.git`
+- ```git@github.com:Mtendekuyokwa19/TaskManagementSystem.git```
 2. Installation of all the pckages
-- `npx webpack`
+- ```npx webpack```
 
-3.
-- `npm i html-webpack-plugin`
+3. 
+- ```npm i html-webpack-plugin```
 
  ## Features and Aspects
 
@@ -37,7 +37,10 @@ A task management system developed using vanilla JS and css. The development pro
                                                   
 ![Screenshot of reading status](./readMepngs/readstatus.png)
 > The status has been set to complete
+
 4. Editing the Task
+
+
 ![Screenshot of reading status](./readMepngs/edit.png)
 
 > a pop up similar to the one used when entering a new task comes up. The creditials of the Task you are trying to edit are auto-filed
