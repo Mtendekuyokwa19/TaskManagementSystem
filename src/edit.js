@@ -6,25 +6,13 @@ export class editingTask{
 
 
     constructor(button,index){
-
         this.button=button.addEventListener('click',function(e){
 
-
-          
             editTaskFunctionalities.showTask(editTaskFunctionalities.taskToedit(index))
             dialogForEdit.createTask(index);
             
-
-
         })
-
-
-
-}
-
-
-
-    
+}    
 }
 
 let editTaskFunctionalities=(()=>{
@@ -49,10 +37,6 @@ let editTaskFunctionalities=(()=>{
         dialogForEdit.createDialogBox(task)
         
     }
-
-
-    
-
 
 return {showTask,taskToedit}
 })()

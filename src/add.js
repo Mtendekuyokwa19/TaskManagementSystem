@@ -69,7 +69,7 @@ export let TaskManagement=(()=>{
     class createTask{
 
 
-        constructor(title,description,date,priority,status="undone",projectBelong=""){
+        constructor(title,description="No description",date,priority,status="undone",projectBelong=""){
     
             this.title=title;
             this.description=description;

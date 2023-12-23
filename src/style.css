@@ -657,3 +657,21 @@ margin-top: 16px;
 color: red;
 
 }
+
+#notTasksdiv{
+
+  border: solid red 3px;
+grid-row: 1/-1;
+grid-column: 1/-1;
+font-size: 72px;
+
+}
+#Hey{
+
+  grid-column-start: 1;
+  grid-column-end: -2;
+  grid-row-start: 1;
+  grid-row-end: -1;
+
+
+}

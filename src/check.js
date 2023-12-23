@@ -5,6 +5,7 @@ import { knowWhichsectiondialogis } from "./Dom.js";
 import { allMaterials } from "./add.js";
 import { strikeOuteffect } from "./Dom.js";
 import { ProjectManagement } from "./add.js";
+import { localStorageManagement } from "./index.js";
 
 export class completeButtonforEachProject{
 
@@ -37,7 +38,8 @@ export class completeButtonforEachProject{
             
 
         }
-           
+          
+        localStorageManagement.addTotheLocalStorage()
         })
     
     }
@@ -46,6 +48,8 @@ export class completeButtonforEachProject{
 
 
 }
+
+
 let checkingFunction=(()=>{
 
 function CheckingInHome(index){

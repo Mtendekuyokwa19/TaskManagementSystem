@@ -15,6 +15,7 @@ import { todayButtonFunctionalities } from "./Dom";
 import { orderTasks } from "./Dom";
 import { deleteProjectDom } from "./Dom";
 import { updatingCompletedTask } from "./Dom";
+import { localStorageManagement } from ".";
 
 
 export let deleteTasks=(()=>{
@@ -27,6 +28,8 @@ export let deleteTasks=(()=>{
                
               
                 deleteingTasksofproject.buttonManager()
+            localStorageManagement.addTotheLocalStorage()
+
 
             })
 
@@ -119,6 +122,7 @@ class removeProject{
           
             deleteProjectDom.eraseProject()
             positionAndrefreshing(index)
+            localStorageManagement.addTotheLocalStorage()
             
         })
 

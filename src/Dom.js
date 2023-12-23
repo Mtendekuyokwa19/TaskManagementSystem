@@ -29,6 +29,7 @@ import { deleteTasks } from './delete.js'
 import isThisWeek from 'date-fns/isThisWeek/index.js'
 import { deleteProject } from './delete.js'
 import { editingTask } from './edit.js'
+import { loadingThetasksWhenRefreshing, localStorageManagement } from './index.js'
 
 class createElementtoDom{
 
@@ -233,6 +234,9 @@ inputBoxcreateProjects.doneButton.addEventListener('click',function (e) {
  creatingProject()
  e.preventDefault();
   inputBoxcreateProjects.dialogBox.close();
+  localStorageManagement.addTotheLocalStorage()
+  
+
   
    
   
@@ -354,10 +358,13 @@ createTaskDialog.cancelTask.addEventListener('click',function (e) {
 
 function addTask(){
 
-  if(createTaskDialog.TaskName.value===""||createTaskDialog.TaskDescription.value===""||createTaskDialog.date.value===""){
+  if(createTaskDialog.TaskName.value===""||createTaskDialog.date.value===undefined||createTaskDialog.date.value===undefined){
 
     return 
   }
+
+  
+  (createTaskDialog.TaskDescription.value==="")?createTaskDialog.TaskDescription.value="No description":createTaskDialog.TaskDescription.value;
 
 let newTask=new TaskManagement.createTask(createTaskDialog.TaskName.value,createTaskDialog.TaskDescription.value,createTaskDialog.date.value,createTaskDialog.PriorityDropdown.value)
 newTask.Project=allMaterials.allProjects[TaskManagement.projectPos.position].projectTitle;
@@ -402,7 +409,7 @@ function enterTask() {
   deleteingTasksofproject.buttonManager()
   editingTheTask.editFunctionalities()
 
- 
+ localStorageManagement.addTotheLocalStorage()
   
   
 }
@@ -484,10 +491,7 @@ for (let i = 1; i < arrayOfprojects.length; i++) {
 
 }
 createButtonsFromAllProjects();
-function closeAddtask() {
-  
-  
-}
+
 
 let contentTobeupdatedChangingProjects=(()=>{
 
@@ -508,13 +512,12 @@ return {content};
     return element;
   }
 
+  
 
 
 
 
-
-
-
+  
 
 let statistics=(()=>{
 
@@ -695,6 +698,7 @@ return {TaskBox};
 
 
 
+
 export let defaultProjectButton=(()=>{
   let projectButton=document.querySelectorAll('#project');
 
@@ -704,7 +708,7 @@ export let defaultProjectButton=(()=>{
 return{defaultProject}
 })()
 
- function projectButtons(){
+ export function projectButtons(){
   let allprojectButtons=document.querySelectorAll('#project');
  
   let index=1;
@@ -769,8 +773,6 @@ export function homeButtonReset() {
     movingTasks.makeTaskbox();
     UpdateNumberOfProjects()
 
-    // movingTasks.placingTasks();
-    // movingTasks.updateAlltasks();
     knowWhichsectiondialogis.section="Home";
     knowsection();
     completeTask.manageCheckbox();
@@ -1078,6 +1080,7 @@ console.log(task)
   Createbtn.addEventListener('click',function (e) {
     managetask(position)
     configureEverything()
+    localStorageManagement.addTotheLocalStorage()
   })
 
 
@@ -1103,4 +1106,16 @@ function removeEventListenersFrombtn(id) {
 var new_element = old_element.cloneNode(true);
 old_element.parentNode.replaceChild(new_element, old_element);
 }
+
+
+  
+  
+
+
+
+loadingThetasksWhenRefreshing.loadTasksRefresh()
+console.log(allMaterials.allProjects)
+
+
+
 
