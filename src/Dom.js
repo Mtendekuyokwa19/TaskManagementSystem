@@ -70,7 +70,7 @@ let appTitleHolder=domElementMaker.domElementCreator('div',"appTitleHolder",side
 
 let appLogo=domElementMaker.ImageLoadtoDOm(HeadImage,appTitleHolder,"appLogo")
 
-let appTitle=domElementMaker.domElementCreator('p',"appTitle",appTitleHolder,"Ubuntu Tasks");
+let appTitle=domElementMaker.domElementCreator('p',"appTitle",appTitleHolder,"Mtende's Tasks");
 
 
 
