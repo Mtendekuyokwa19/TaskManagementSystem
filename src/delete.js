@@ -3,7 +3,7 @@ import { ProjectManagement } from "./add";
 import { allMaterials } from "./add";
 import isAfter from "date-fns/isAfter";
 import { isBefore } from "date-fns";
-import { deleteingTasksofproject } from "./Dom";
+import { deleteingTasksofproject, editingTheTask } from "./Dom";
 import { knowWhichsectiondialogis } from "./Dom";
 import { TaskManagement } from "./add";
 import { movingTasks } from "./Dom";
@@ -16,6 +16,7 @@ import { orderTasks } from "./Dom";
 import { deleteProjectDom } from "./Dom";
 import { updatingCompletedTask } from "./Dom";
 import { localStorageManagement } from ".";
+import { editingTask } from "./edit";
 
 
 export let deleteTasks=(()=>{
@@ -83,9 +84,11 @@ deletingTaskinHome(index)
         console.log(allMaterials.allTasks)
         movingTasks.resettingTaskboxAfterdeleteHome();
         movingTasks.updateAlltasks();
+       
+
       if(knowWhichsectiondialogis.section==="Home"){
         updatingCompletedTask();
-
+        editingTheTask.editFunctionalities()
 
       }
        
@@ -98,11 +101,11 @@ function deletingTaskInProjects(index){
         allMaterials.allProjects[TaskManagement.projectPos.position].projectList.splice(index,1);
         TaskManagement.addingToallTasks();
         
-       
+      
       movingTasks.placingTasks()
      
 
-
+      editingTheTask.editFunctionalities()
        }
 
        return {clearOverdue,deletingSpecificTask,deleteTask}
@@ -122,6 +125,7 @@ class removeProject{
           
             deleteProjectDom.eraseProject()
             positionAndrefreshing(index)
+            editingTheTask.editFunctionalities();
             localStorageManagement.addTotheLocalStorage()
             
         })
